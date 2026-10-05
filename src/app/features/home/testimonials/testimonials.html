@@ -1,0 +1,30 @@
+@if (testimonials.hasItems()) {
+  <section class="section reviews" id="resenas" aria-labelledby="reviews-title">
+    <div class="container">
+      <app-section-title eyebrow="Reseñas" title="Lo que dicen de SABORES." accent="SABORES" align="center" />
+
+      <ul class="reviews__list">
+        @for (t of testimonials.items(); track t.id; let i = $index) {
+          <li class="review" appReveal [revealDelay]="i * 90">
+            <blockquote>
+              <p class="display review__quote">“{{ t.quote }}”</p>
+            </blockquote>
+            <footer class="review__meta">
+              @if (t.rating) {
+                <span class="review__stars" [attr.aria-label]="t.rating + ' de 5 estrellas'">
+                  @for (s of stars(t.rating); track $index) {
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7L12 17.4 5.8 21l1.6-7L2 9.3l7.1-.7z"/></svg>
+                  }
+                </span>
+              }
+              <cite>{{ t.author }}</cite>
+              @if (t.source) {
+                <span class="review__source">{{ t.source }}</span>
+              }
+            </footer>
+          </li>
+        }
+      </ul>
+    </div>
+  </section>
+}

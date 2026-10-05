@@ -1,0 +1,58 @@
+<header class="nav">
+  <div class="nav__inner container">
+    <a class="nav__brand" routerLink="/" (click)="close()" aria-label="SABORES, ir al inicio">
+      <img class="nav__logo" src="assets/images/brand/logo.jpg" alt="" width="56" height="56" />
+      <span class="nav__wordmark">{{ restaurant.name() }}</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Navegación principal">
+      <ul>
+        @for (link of links; track link.label) {
+          <li>
+            <a
+              [routerLink]="'/' + link.path"
+              [fragment]="link.fragment"
+              [class.is-active]="isActive(link)"
+              [attr.aria-current]="isActive(link) ? 'page' : null"
+            >
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <a class="btn btn--primary nav__cta" routerLink="/menu"><app-icon name="menu-card" [size]="15" />Ver menú</a>
+
+    <button
+      class="nav__burger"
+      type="button"
+      (click)="toggle()"
+      [attr.aria-expanded]="open()"
+      aria-controls="mobile-menu"
+      aria-label="Abrir menú de navegación"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="mobile-menu" [attr.aria-hidden]="!open()" [inert]="!open()">
+  <div class="drawer__backdrop" (click)="close()"></div>
+  <nav class="drawer__panel" aria-label="Navegación móvil">
+    <ul class="drawer__list">
+      @for (link of links; track link.label; let i = $index) {
+        <li [style.--i]="i">
+          <a [routerLink]="'/' + link.path" [fragment]="link.fragment" (click)="close()">
+            <span class="drawer__index">0{{ i + 1 }}</span>
+            <span class="drawer__label display">{{ link.label }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+    <div class="drawer__footer">
+      <a class="btn btn--primary" routerLink="/menu" (click)="close()"><app-icon name="menu-card" [size]="16" />Ver menú</a>
+      <p class="drawer__tagline">{{ restaurant.tagline() }}</p>
+    </div>
+  </nav>
+</div>

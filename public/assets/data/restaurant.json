@@ -1,0 +1,49 @@
+{
+  "name": "SABORES",
+  "legalName": "Restaurante Sabores",
+  "tagline": "Origen y sabor nos distinguen",
+  "heroDescriptor": "Cocina con origen, tradición y carácter.",
+  "cuisineTags": ["Cocina mexicana", "Ingredientes de temporada", "Sabor de casa"],
+  "phone": "4272290204",
+  "phoneDisplay": "427 229 0204",
+  "whatsapp": "524272290204",
+  "whatsappDefaultMessage": "Hola, me gustaría información sobre el restaurante SABORES.",
+  "address": {
+    "street": "5 de Mayo 84",
+    "neighborhood": "Centro",
+    "city": "San Juan del Río",
+    "state": "Querétaro",
+    "mapsQuery": "5 de Mayo 84, Centro, San Juan del Río, Querétaro"
+  },
+  "hours": [],
+  "hoursNote": "Consulta nuestros horarios por WhatsApp.",
+  "social": [
+    { "id": "instagram", "label": "Instagram", "handle": "@SaboresSjr", "url": "https://www.instagram.com/saboressjr/" }
+  ],
+  "story": {
+    "eyebrow": "Nuestra identidad",
+    "title": "Origen y sabor nos distinguen",
+    "isPlaceholder": false,
+    "paragraphs": [
+      "En SABORES cocinamos con calma: caldos que se preparan desde temprano, guisos que reposan lo necesario y platillos que salen a la mesa cuando están listos, no antes.",
+      "Cada platillo busca sentirse casero antes que perfecto: ingredientes frescos, recetas de siempre y una cocina que no le tiene miedo a las porciones generosas."
+    ],
+    "highlights": [
+      { "label": "Cocina", "value": "Mexicana de casa" },
+      { "label": "Ubicación", "value": "Centro de San Juan del Río" },
+      { "label": "Ambiente", "value": "Familiar" }
+    ],
+    "image": "assets/images/hero/pozole-circle.jpg",
+    "imageAlt": "Mesa de SABORES con platillos servidos en cazuelas de barro"
+  },
+  "invoicing": {
+    "url": "",
+    "note": "Solicítala dentro de las 72 horas posteriores a tu visita, con el folio de tu ticket a la mano."
+  },
+  "seo": {
+    "title": "SABORES | Restaurante en San Juan del Río",
+    "description": "SABORES, restaurante en el Centro de San Juan del Río, Querétaro. Consulta nuestro menú digital, especialidades y promociones, y escríbenos por WhatsApp.",
+    "image": "assets/images/gallery/pozole-mesa-wide-og.jpg",
+    "url": ""
+  }
+}

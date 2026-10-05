@@ -1,0 +1,34 @@
+@if (restaurant.story(); as story) {
+  <section class="section story" id="historia" aria-labelledby="story-title">
+    <div class="container story__grid">
+      <figure class="story__media" appReveal>
+        <img [src]="story.image" [alt]="story.imageAlt" [appImgFallback]="restaurant.name()" loading="lazy" decoding="async" width="900" height="1100" />
+        <img class="story__seal" src="assets/images/brand/logo.jpg" alt="" width="120" height="120" loading="lazy" />
+      </figure>
+
+      <div class="story__body">
+        <app-section-title [eyebrow]="story.eyebrow" [title]="story.title" accent="sabor" />
+
+        <div class="story__text" appReveal>
+          @for (p of story.paragraphs; track $index) {
+            <p>{{ p }}</p>
+          }
+          @if (story.isPlaceholder) {
+            <p class="story__placeholder-note">Texto de ejemplo — personalízalo con la historia real de SABORES.</p>
+          }
+        </div>
+
+        @if (story.highlights.length) {
+          <dl class="story__facts" appReveal>
+            @for (h of story.highlights; track h.label) {
+              <div>
+                <dt>{{ h.label }}</dt>
+                <dd class="display">{{ h.value }}</dd>
+              </div>
+            }
+          </dl>
+        }
+      </div>
+    </div>
+  </section>
+}

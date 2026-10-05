@@ -1,0 +1,46 @@
+<section class="section discover" id="descubre" aria-labelledby="discover-title">
+  <div class="container">
+    <div class="discover__head">
+      <app-section-title
+        eyebrow="Descubre SABORES"
+        title="Un menú para recorrer con calma."
+        accent="con calma"
+        lead="Explora por categoría y encuentra tu siguiente platillo."
+      />
+      <a class="btn discover__cta" routerLink="/menu" appReveal>
+        <app-icon name="menu-card" [size]="16" />
+        Ver menú completo
+      </a>
+    </div>
+
+    @if (menu.categories().length) {
+      <!-- Tablet/desktop: editorial grid. -->
+      <ul class="discover__grid scroll-x">
+        @for (c of menu.categories(); track c.id; let i = $index) {
+          <li appReveal [revealDelay]="i * 70">
+            <app-category-card [category]="c" [index]="i" [count]="menu.countByCategory(c.id)" />
+          </li>
+        }
+      </ul>
+
+      <!-- Mobile: one category at a time. -->
+      <div
+        class="discover__stage"
+        (pointerdown)="carousel.onPointerDown($event)"
+        (pointerup)="carousel.onPointerUp($event)"
+        (pointercancel)="carousel.onPointerUp($event)"
+      >
+        <div class="discover__track" [style.transform]="'translateX(' + -carousel.index() * 100 + '%)'">
+          @for (c of menu.categories(); track c.id; let i = $index) {
+            <div class="discover__slide">
+              <app-category-card [category]="c" [index]="i" [count]="menu.countByCategory(c.id)" />
+            </div>
+          }
+        </div>
+      </div>
+      @if (menu.categories().length > 1) {
+        <app-rail-dots class="discover__dots" [count]="menu.categories().length" [active]="carousel.index()" (select)="carousel.to($event)" />
+      }
+    }
+  </div>
+</section>

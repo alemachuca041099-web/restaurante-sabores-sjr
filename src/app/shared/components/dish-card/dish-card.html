@@ -1,0 +1,38 @@
+@let d = dish();
+<article class="card">
+  <button class="card__btn" type="button" (click)="onSelect()" [attr.aria-label]="'Ver detalle de ' + d.name">
+    <figure class="card__media">
+      <img
+        [src]="d.image"
+        [alt]="d.name"
+        [appImgFallback]="d.name"
+        loading="lazy"
+        decoding="async"
+        width="600"
+        height="600"
+      />
+      @if (!d.available) {
+        <span class="card__badge">Agotado</span>
+      }
+    </figure>
+
+    <div class="card__body">
+      <div class="card__head">
+        <h3 class="card__name display">{{ d.name }}</h3>
+        <span class="card__leader" aria-hidden="true"></span>
+        <span class="card__price">{{ d.price | mxn }}</span>
+      </div>
+      <p class="card__desc">{{ d.description }}</p>
+      @if (showCategory() || tagLabels().length) {
+        <ul class="card__meta">
+          @if (showCategory()) {
+            <li>{{ categoryName() }}</li>
+          }
+          @for (t of tagLabels(); track t) {
+            <li class="card__tag">{{ t }}</li>
+          }
+        </ul>
+      }
+    </div>
+  </button>
+</article>

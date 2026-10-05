@@ -1,0 +1,21 @@
+@let c = category();
+<section class="mc" [id]="c.id" [attr.aria-labelledby]="'mc-' + c.id">
+  @if (showHeading()) {
+    <header class="mc__head">
+      <h2 class="display mc__title" [id]="'mc-' + c.id">{{ c.name }}</h2>
+      <p class="mc__desc">{{ c.description }}</p>
+    </header>
+  }
+
+  @if (items().length) {
+    <ul class="mc__list">
+      @for (d of items(); track d.id) {
+        <li>
+          <app-dish-card [dish]="d" (select)="select.emit($event)" />
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="mc__empty">Pregunta por las opciones del día en esta categoría.</p>
+  }
+</section>

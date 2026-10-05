@@ -1,0 +1,248 @@
+.menu-page {
+  padding-top: calc(var(--nav-height) + var(--spacing-lg));
+  padding-bottom: var(--spacing-xl);
+}
+
+.menu-page__head {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Sticky filter bar ------------------------------------------------------ */
+.menu-page__bar {
+  position: sticky;
+  top: var(--nav-height);
+  z-index: 30;
+  background: rgba(11, 10, 9, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-block: 1px solid var(--color-border-soft);
+}
+
+.menu-page__bar-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--spacing-xs);
+  padding-block: var(--spacing-xs);
+}
+
+.menu-page__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.tabs {
+  min-width: 0;
+}
+
+.tabs__list {
+  gap: 0.35rem;
+  margin-inline: 0;
+  padding: 3px;
+}
+
+/* Filters toggle (mobile) — the search/availability row starts collapsed
+   behind this icon so the sticky bar doesn't cost half the screen by
+   default; it lights up like the other active controls when a filter is
+   already applied, even while collapsed, so nothing feels silently active. */
+.filters-toggle {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-soft);
+  color: var(--color-muted);
+  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease, background-color var(--duration-fast) ease;
+}
+
+.filters-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.filters-toggle.is-active {
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.filters-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration) var(--ease-out);
+}
+
+.filters-wrap > .filters {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.filters-wrap.is-open {
+  grid-template-rows: 1fr;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  white-space: nowrap;
+  transition:
+    color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
+}
+
+.tab:hover {
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.tab.is-active {
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.tab__count {
+  font-size: var(--text-xs);
+}
+
+.filters {
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+}
+
+.search {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  padding: 0 0.9rem;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-full);
+  transition: border-color var(--duration-fast) ease;
+}
+
+.search:focus-within {
+  border-color: var(--color-primary);
+}
+
+.search svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-muted);
+  flex: none;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: 0;
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--text-base);
+  outline: none;
+}
+
+.search input::placeholder {
+  color: var(--color-muted);
+}
+
+.avail-toggle {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-soft);
+  color: var(--color-muted);
+  transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease, background-color var(--duration-fast) ease;
+}
+
+.avail-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.avail-toggle.is-on {
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Body ----------------------------------------------------------------- */
+.menu-page__body {
+  display: grid;
+  gap: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+}
+
+.menu-page__section {
+  animation: section-in var(--duration-slow) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+.menu-page__state {
+  padding-block: var(--spacing-lg);
+  text-align: center;
+  color: var(--color-muted);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-style: italic;
+}
+
+@keyframes section-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .menu-page__bar-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .tabs__list {
+    padding-inline: 0;
+    margin-inline: 0;
+  }
+
+  .search {
+    min-width: 240px;
+  }
+
+  /* The collapse-behind-an-icon pattern is mobile-only — desktop has room
+     to show search + availability inline, like before. */
+  .filters-toggle {
+    display: none;
+  }
+
+  .filters-wrap {
+    display: contents;
+  }
+
+  .filters-wrap > .filters {
+    overflow: visible;
+  }
+}

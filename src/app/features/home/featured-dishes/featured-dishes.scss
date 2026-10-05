@@ -1,0 +1,84 @@
+.featured {
+  background:
+    radial-gradient(50% 30% at 50% 0%, rgba(201, 162, 74, 0.07), transparent 70%),
+    var(--color-background);
+}
+
+.featured__head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.featured__nav {
+  display: none;
+  gap: 0.5rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.featured__arrow {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  color: var(--color-muted);
+  transition: border-color var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.featured__arrow:hover {
+  border-color: var(--color-primary);
+  color: var(--color-accent);
+}
+
+/* Mobile: the peek-rail is replaced by the single-slide stage below. */
+.featured__rail {
+  display: none;
+}
+
+.featured__stage {
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.featured__track {
+  display: flex;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.featured__slide {
+  flex: 0 0 100%;
+  padding-inline: 1px; /* keeps the tile's own border-radius from clipping at the edge */
+}
+
+.featured__dots {
+  margin-top: var(--spacing-sm);
+}
+
+@media (min-width: 640px) {
+  .featured__nav {
+    display: flex;
+  }
+
+  .featured__rail {
+    display: flex;
+  }
+
+  .featured__rail li {
+    width: min(32vw, 300px);
+  }
+
+  .featured__stage,
+  .featured__dots {
+    display: none;
+  }
+}
+
+@media (min-width: 1100px) {
+  .featured__rail li {
+    width: min(22vw, 320px);
+  }
+}

@@ -1,0 +1,335 @@
+{
+  "categories": [
+    {
+      "id": "desayunos",
+      "name": "Desayunos",
+      "description": "Para empezar el día",
+      "image": "assets/images/menu/cat-desayunos.jpg",
+      "order": 1
+    },
+    {
+      "id": "sopas-cremas",
+      "name": "Sopas y cremas",
+      "description": "Calor de casa",
+      "image": "assets/images/gallery/pozole-cazuelas.jpg",
+      "order": 2
+    },
+    {
+      "id": "especialidades",
+      "name": "Especialidades",
+      "description": "Lo que nos distingue",
+      "image": "assets/images/menu/cat-especialidades.jpg",
+      "order": 3
+    },
+    {
+      "id": "carnes",
+      "name": "Carnes",
+      "description": "Cortes y guisos",
+      "image": "assets/images/promotions/mar-y-tierra.jpg",
+      "order": 4
+    },
+    {
+      "id": "pescados-mariscos",
+      "name": "Pescados y mariscos",
+      "description": "Frescura del mar",
+      "image": "assets/images/menu/cat-mariscos.jpg",
+      "order": 5
+    },
+    {
+      "id": "bebidas",
+      "name": "Bebidas",
+      "description": "Para acompañar",
+      "image": "assets/images/menu/cat-bebidas.jpg",
+      "order": 6
+    }
+  ],
+  "items": [
+    {
+      "id": "pozole-artesanal",
+      "name": "Pozole Artesanal",
+      "description": "Verde, blanco o rojo, con lechuga, cebolla, chile verde, limón, tostada, rábano y orégano.",
+      "price": 110,
+      "categoryId": "sopas-cremas",
+      "image": "assets/images/gallery/pozole-cazuelas.jpg",
+      "featured": true,
+      "available": true,
+      "tags": [
+        "casa"
+      ],
+      "note": "El pozole verde tiene un costo de $120. Pregunta por las órdenes extra: chile capón, aguacate, tacos dorados o chicharrón."
+    },
+    {
+      "id": "chilaquiles",
+      "name": "Chilaquiles",
+      "description": "Totopos bañados en salsa, con crema, queso y cebolla.",
+      "price": 186,
+      "categoryId": "desayunos",
+      "image": "assets/images/menu/chilaquiles.jpg",
+      "featured": true,
+      "available": true,
+      "tags": [
+        "vegetariano"
+      ]
+    },
+    {
+      "id": "mole-verde-pollo",
+      "name": "Mole Verde de Pollo",
+      "description": "Pieza de pollo bañada en mole verde, servida con arroz y tortillas.",
+      "price": 170,
+      "categoryId": "especialidades",
+      "image": "assets/images/menu/mole-verde.jpg",
+      "featured": true,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "chile-relleno-crema",
+      "name": "Chile Relleno en Crema",
+      "description": "Chile relleno bañado en salsa cremosa, acompañado de arroz.",
+      "price": 170,
+      "categoryId": "especialidades",
+      "image": "assets/images/menu/chile-relleno.jpg",
+      "featured": true,
+      "available": true,
+      "tags": [
+        "vegetariano"
+      ]
+    },
+    {
+      "id": "enmoladas-pollo",
+      "name": "Enmoladas de Pollo",
+      "description": "Enmoladas bañadas en mole, con crema, queso y arroz.",
+      "price": 110,
+      "categoryId": "especialidades",
+      "image": "assets/images/menu/enmoladas-pollo.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "comboy",
+      "name": "Comboy",
+      "description": "Papas, chiles toreados y guacamole, ideal para compartir.",
+      "price": 280,
+      "categoryId": "especialidades",
+      "image": "assets/images/menu/comboy.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "vegetariano"
+      ]
+    },
+    {
+      "id": "ribeye",
+      "name": "Ribeye",
+      "description": "Corte ribeye a la parrilla con frijoles, arroz, lechuga y papas.",
+      "price": 230,
+      "categoryId": "carnes",
+      "image": "assets/images/menu/ribeye.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "arrachera",
+      "name": "Arrachera",
+      "description": "250 g de arrachera a la parrilla con arroz, lechuga, papas y frijoles.",
+      "price": 150,
+      "categoryId": "carnes",
+      "image": "assets/images/promotions/sabor-ranchero.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "pollo-cordon-blue",
+      "name": "Pollo al Cordón Blue",
+      "description": "Pechuga rellena empanizada, servida con ensalada y arroz.",
+      "price": 135,
+      "categoryId": "carnes",
+      "image": "assets/images/menu/pollo-cordon-blue.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "parrillada-4-personas",
+      "name": "Parrillada para 4 Personas",
+      "description": "Pechuga, cecina, chorizo, camarones y arrachera con carne enchilada, arroz, frijoles y queso. Para compartir.",
+      "price": 550,
+      "categoryId": "carnes",
+      "image": "assets/images/menu/parrillada.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "mojarra-al-gusto",
+      "name": "Mojarra al Gusto",
+      "description": "Mojarra entera al mojo de ajo, al ajillo, a la diabla o frita.",
+      "price": 210,
+      "categoryId": "pescados-mariscos",
+      "image": "assets/images/menu/mojarra-frita.jpg",
+      "featured": true,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "salmon-naranja",
+      "name": "Salmón a la Naranja",
+      "description": "Filete de salmón en reducción de naranja, con guarnición de la casa.",
+      "price": 280,
+      "categoryId": "pescados-mariscos",
+      "image": "assets/images/menu/salmon-naranja.jpg",
+      "featured": true,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "salmon-plancha",
+      "name": "Salmón a la Plancha",
+      "description": "Filete de salmón a la plancha, con verduras y arroz.",
+      "price": 260,
+      "categoryId": "pescados-mariscos",
+      "image": "assets/images/menu/salmon-plancha.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "filete-al-gusto",
+      "name": "Filete al Gusto",
+      "description": "Filete de pescado al mojo de ajo, a la diabla, al ajillo o en salsa de mango.",
+      "price": 150,
+      "categoryId": "pescados-mariscos",
+      "image": "assets/images/menu/filete-al-gusto.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "aguachile-mango-habanero",
+      "name": "Aguachile Mango-Habanero",
+      "description": "Camarón curtido en aguachile de mango y habanero, con pepino y cebolla morada.",
+      "price": 150,
+      "categoryId": "pescados-mariscos",
+      "image": "assets/images/menu/aguachile-mango.jpg",
+      "featured": true,
+      "available": true,
+      "tags": [
+        "picante"
+      ]
+    },
+    {
+      "id": "aguachile-verde",
+      "name": "Aguachile Verde",
+      "description": "Camarón en aguachile verde de chile serrano y limón, con pepino y aguacate.",
+      "price": 150,
+      "categoryId": "pescados-mariscos",
+      "image": "assets/images/menu/aguachile-verde.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "picante"
+      ]
+    },
+    {
+      "id": "aguachile-rojo",
+      "name": "Aguachile Rojo",
+      "description": "Camarón curtido en aguachile rojo, con pepino y cebolla morada.",
+      "price": 150,
+      "categoryId": "pescados-mariscos",
+      "image": "assets/images/menu/aguachile-rojo.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "picante"
+      ]
+    },
+    {
+      "id": "camarones-al-gusto",
+      "name": "Camarones al Gusto",
+      "description": "Al mojo de ajo, al ajillo, al coco con salsa de mango o a la diabla.",
+      "price": 170,
+      "categoryId": "pescados-mariscos",
+      "image": "assets/images/menu/camarones-al-gusto.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "cazuela-mariscos",
+      "name": "Cazuela de Mariscos",
+      "description": "Camarones, pulpo, jaiba, pescado, surimi y almejas en un solo caldillo.",
+      "price": 210,
+      "categoryId": "pescados-mariscos",
+      "image": "assets/images/menu/cazuela-mariscos.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "tacos-gobernador",
+      "name": "Tacos Gobernador",
+      "description": "Orden de 3 piezas con camarón y queso.",
+      "price": 120,
+      "categoryId": "pescados-mariscos",
+      "image": "assets/images/menu/tacos-gobernador.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "coctel-camaron-chico",
+      "name": "Cóctel de Camarón Chico",
+      "description": "Cóctel de camarón fresco, tamaño individual.",
+      "price": 95,
+      "categoryId": "pescados-mariscos",
+      "image": "assets/images/menu/coctel-camaron.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    },
+    {
+      "id": "coctel-camaron-grande",
+      "name": "Cóctel de Camarón Grande",
+      "description": "Cóctel de camarón fresco, tamaño grande para compartir.",
+      "price": 160,
+      "categoryId": "pescados-mariscos",
+      "image": "assets/images/menu/coctel-camaron.jpg",
+      "featured": false,
+      "available": true,
+      "tags": [
+        "casa"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+@if (restaurant.restaurant(); as r) {
+  <section class="section location" id="ubicacion" aria-labelledby="location-title">
+    <div class="container location__grid">
+      <div class="location__info">
+        <app-section-title eyebrow="Ubicación" title="Visítanos en el Centro." accent="Centro" />
+
+        <address class="location__address display" appReveal>
+          {{ r.address.street }}<br />
+          {{ r.address.neighborhood }}<br />
+          {{ r.address.city }}, {{ r.address.state }}
+        </address>
+
+        <a class="location__phone" [href]="restaurant.phoneHref()" appReveal>{{ r.phoneDisplay }}</a>
+
+        <div class="location__hours" appReveal>
+          <p class="eyebrow rule rule--start">Horarios</p>
+          @if (r.hours.length) {
+            <dl>
+              @for (h of r.hours; track h.days) {
+                <div>
+                  <dt>{{ h.days }}</dt>
+                  <dd>{{ h.hours }}</dd>
+                </div>
+              }
+            </dl>
+          } @else {
+            <p class="location__note">{{ r.hoursNote }}</p>
+          }
+        </div>
+
+        <div class="location__actions" appReveal>
+          <a class="btn btn--primary" [href]="restaurant.mapsUrl()" target="_blank" rel="noopener">
+            <app-icon name="map-pin" [size]="17" />
+            Abrir en Google Maps
+          </a>
+          @if (whatsapp.ready()) {
+            <a class="btn btn--whatsapp" [href]="whatsapp.defaultUrl()" target="_blank" rel="noopener">
+              <app-icon name="whatsapp" [size]="17" />
+              WhatsApp
+            </a>
+          }
+        </div>
+
+        @if (restaurant.invoicingUrl(); as invoicingUrl) {
+          <div class="location__invoicing" appReveal>
+            <a class="btn btn--sm" [href]="invoicingUrl" target="_blank" rel="noopener">
+              <app-icon name="receipt" [size]="16" />
+              Facturar mi compra
+            </a>
+            @if (restaurant.invoicingNote(); as note) {
+              <p class="location__note">{{ note }}</p>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="location__map" appReveal>
+        @if (embedUrl(); as url) {
+          <iframe
+            [src]="url"
+            title="Mapa de ubicación de SABORES"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        }
+      </div>
+    </div>
+  </section>
+}

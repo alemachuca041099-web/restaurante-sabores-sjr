@@ -1,0 +1,52 @@
+@if (comidaCorrida.value(); as cc) {
+  <section class="section cc" id="comida-corrida" aria-labelledby="cc-title">
+    <div class="container cc__wrap">
+      <app-section-title eyebrow="Todos los días" title="Comida Corrida" align="center" />
+
+      <div class="cc__layout">
+        <figure class="cc__media" appReveal>
+          <img [src]="cc.image" [alt]="cc.subtitle" [appImgFallback]="cc.title" loading="lazy" decoding="async" width="900" height="1100" />
+        </figure>
+
+        <article class="cc__card" appReveal>
+          <svg class="cc__spark" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M20 4l3.2 12.8L36 20l-12.8 3.2L20 36l-3.2-12.8L4 20l12.8-3.2z" />
+          </svg>
+
+          <p class="cc__subtitle display" id="cc-title">{{ cc.subtitle }}</p>
+          <p class="cc__price display">{{ cc.price | mxn }}</p>
+          <p class="cc__note">{{ cc.note }}</p>
+
+          <div class="cc__rule" aria-hidden="true"><span></span></div>
+
+          <ul class="cc__includes">
+            @for (item of cc.includes; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+
+          <div class="cc__rule" aria-hidden="true"><span></span></div>
+
+          <h3 class="eyebrow cc__guisos-title">Guisos disponibles hoy</h3>
+          <ul class="cc__guisos">
+            @for (g of cc.guisos; track g.id) {
+              <li>
+                {{ g.name }}
+                @if (g.note) {
+                  <span class="cc__guiso-note">{{ g.note }}</span>
+                }
+              </li>
+            }
+          </ul>
+
+          @if (whatsapp.ready()) {
+            <a class="btn btn--primary cc__cta" [href]="whatsapp.comidaCorridaInquiryUrl()" target="_blank" rel="noopener">
+              <app-icon name="whatsapp" [size]="17" />
+              Preguntar el guiso de hoy
+            </a>
+          }
+        </article>
+      </div>
+    </div>
+  </section>
+}

@@ -1,0 +1,44 @@
+@if (gallery.hasItems()) {
+  <section class="section gallery" id="galeria" aria-labelledby="gallery-title">
+    <div class="container">
+      <app-section-title eyebrow="Galería" title="La mesa, en imágenes." accent="en imágenes" align="center" />
+
+      <ul class="masonry">
+        @for (item of gallery.items(); track item.id; let i = $index) {
+          <li class="masonry__item" [class]="'masonry__item masonry__item--' + (item.size ?? 'normal')" appReveal [revealDelay]="(i % 4) * 80">
+            <button type="button" class="masonry__btn" (click)="open(i)" [attr.aria-label]="'Ampliar: ' + item.alt">
+              <img [src]="item.image" [alt]="item.alt" [appImgFallback]="item.caption ?? ''" loading="lazy" decoding="async" width="800" height="800" />
+              @if (item.caption) {
+                <figcaption class="masonry__caption">{{ item.caption }}</figcaption>
+              }
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <app-modal [open]="active() !== null" label="Imagen de la galería" (closed)="close()">
+    @if (active(); as item) {
+      <figure class="lightbox">
+        <img [src]="item.image" [alt]="item.alt" [appImgFallback]="item.caption ?? ''" decoding="async" />
+        <figcaption>
+          @if (item.caption) {
+            <span class="display lightbox__caption">{{ item.caption }}</span>
+          }
+          @if (hasMany()) {
+            <span class="lightbox__nav">
+              <button type="button" class="lightbox__arrow" (click)="step(-1)" aria-label="Imagen anterior">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+              </button>
+              <span class="lightbox__count">{{ (activeIndex() ?? 0) + 1 }} / {{ gallery.items().length }}</span>
+              <button type="button" class="lightbox__arrow" (click)="step(1)" aria-label="Imagen siguiente">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+              </button>
+            </span>
+          }
+        </figcaption>
+      </figure>
+    }
+  </app-modal>
+}

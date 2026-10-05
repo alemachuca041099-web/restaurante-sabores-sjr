@@ -1,0 +1,21 @@
+{
+  "title": "Comida Corrida",
+  "subtitle": "Sabores de la casa",
+  "price": 130,
+  "includes": ["Sopa del día", "Un guiso a elegir", "Guarnición", "Agua del día", "Postre"],
+  "note": "El guiso cambia cada día. Pregunta por las opciones disponibles hoy.",
+  "image": "assets/images/menu/comida-corrida.jpg",
+  "guisos": [
+    { "id": "higado-encebollado", "name": "Hígado encebollado" },
+    { "id": "cecina", "name": "Cecina" },
+    { "id": "carne-enchilada", "name": "Carne enchilada", "note": "Bistec de puerco" },
+    { "id": "chile-relleno-cc", "name": "Chile relleno en crema o jitomate" },
+    { "id": "milaneza-pollo", "name": "Milaneza de pollo" },
+    { "id": "pechuga-crema", "name": "Trozos de pechuga en crema" },
+    { "id": "mole-pollo-cc", "name": "Mole rojo o verde de pollo" },
+    { "id": "muslo-pollo-frito", "name": "Muslo de pollo frito" },
+    { "id": "chuleta-chipotle", "name": "Chuleta ahumada en salsa de chipotle" },
+    { "id": "milanesa-res", "name": "Milanesa de res" },
+    { "id": "costillas-salsa", "name": "Costillas de cerdo en salsa" }
+  ]
+}

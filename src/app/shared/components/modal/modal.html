@@ -1,0 +1,21 @@
+<div class="modal" [attr.aria-hidden]="!open()" [inert]="!open()">
+  <div class="modal__backdrop" (click)="close()"></div>
+  <div
+    #panel
+    class="modal__panel"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="label()"
+    tabindex="-1"
+  >
+    <button class="modal__close" type="button" (click)="close()" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+    <div class="modal__handle" aria-hidden="true"></div>
+    <div class="modal__content">
+      <ng-content />
+    </div>
+  </div>
+</div>

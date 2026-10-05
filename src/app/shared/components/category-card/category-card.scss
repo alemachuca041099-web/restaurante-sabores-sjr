@@ -1,0 +1,97 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.cat {
+  position: relative;
+  display: block;
+  /* Explicit min-height as a fallback: some ancestors (grid items sized by
+     content, flex rails) cannot always be relied on to hand down a definite
+     height, and .cat__media/.cat__body below are absolutely positioned to
+     fill whatever height `.cat` ends up with. */
+  height: 100%;
+  min-height: 260px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  isolation: isolate;
+}
+
+.cat__media {
+  position: absolute;
+  inset: 0;
+}
+
+.cat__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-out), filter var(--duration-slow) ease;
+  filter: brightness(0.7);
+}
+
+.cat:hover .cat__media img {
+  transform: scale(1.06);
+  filter: brightness(0.5);
+}
+
+.cat__body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.2rem;
+  padding: var(--spacing-md);
+  background: linear-gradient(to top, rgba(11, 10, 9, 0.95) 0%, rgba(11, 10, 9, 0.55) 55%, transparent 100%);
+}
+
+.cat__index {
+  position: absolute;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-primary);
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--color-primary);
+}
+
+.cat__name {
+  font-size: var(--text-2xl);
+  overflow-wrap: break-word;
+  hyphens: auto;
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.cat__desc {
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+}
+
+.cat__count {
+  margin-top: 0.4rem;
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--duration) ease, transform var(--duration) var(--ease-out);
+}
+
+.cat:hover .cat__count,
+.cat:focus-visible .cat__count {
+  opacity: 1;
+  transform: none;
+}
+
+@media (hover: none) {
+  .cat__count {
+    opacity: 1;
+    transform: none;
+  }
+}

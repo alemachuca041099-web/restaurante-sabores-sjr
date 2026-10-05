@@ -1,0 +1,51 @@
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <div class="footer__mark">
+        <img src="assets/images/brand/logo.jpg" alt="Logotipo de Restaurante Sabores" width="72" height="72" loading="lazy" />
+        <p class="footer__wordmark display">{{ restaurant.name() }}</p>
+      </div>
+      <p class="footer__tagline display">{{ restaurant.tagline() }}</p>
+    </div>
+
+    <div class="footer__col">
+      <p class="eyebrow rule rule--start">Explora</p>
+      <ul>
+        <li><a routerLink="/">Inicio</a></li>
+        <li><a routerLink="/menu">Menú</a></li>
+        <li><a routerLink="/" fragment="especialidades">Especialidades</a></li>
+        <li><a routerLink="/" fragment="galeria">Galería</a></li>
+        <li><a routerLink="/" fragment="ubicacion">Ubicación</a></li>
+      </ul>
+    </div>
+
+    @if (restaurant.address(); as address) {
+      <div class="footer__col">
+        <p class="eyebrow rule rule--start">Visítanos</p>
+        <address>
+          {{ address.street }}<br />
+          {{ address.neighborhood }}<br />
+          {{ address.city }}, {{ address.state }}
+        </address>
+        <ul>
+          <li><a [href]="restaurant.phoneHref()">{{ restaurant.restaurant()?.phoneDisplay }}</a></li>
+          @if (whatsapp.ready()) {
+            <li><a [href]="whatsapp.defaultUrl()" target="_blank" rel="noopener">WhatsApp</a></li>
+          }
+          @for (s of restaurant.restaurant()?.social ?? []; track s.id) {
+            @if (s.url) {
+              <li><a [href]="s.url" target="_blank" rel="noopener">{{ s.label }} {{ s.handle }}</a></li>
+            } @else {
+              <li>{{ s.label }} {{ s.handle }}</li>
+            }
+          }
+        </ul>
+      </div>
+    }
+  </div>
+
+  <div class="container footer__bottom">
+    <span>© {{ year }} {{ restaurant.restaurant()?.legalName ?? restaurant.name() }}</span>
+    <span>{{ restaurant.address()?.city }}, {{ restaurant.address()?.state }}</span>
+  </div>
+</footer>

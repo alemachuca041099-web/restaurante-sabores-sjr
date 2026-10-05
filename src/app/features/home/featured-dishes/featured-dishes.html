@@ -1,0 +1,44 @@
+@if (dishes().length) {
+  <section class="section featured" id="especialidades" aria-labelledby="featured-title">
+    <div class="container">
+      <div class="featured__head">
+        <app-section-title eyebrow="Lo que nos distingue" title="Nuestros favoritos" accent="favoritos" />
+        <div class="featured__nav">
+          <button type="button" class="featured__arrow" (click)="scroll(-1)" aria-label="Ver anteriores">
+            <app-icon name="chevron-left" />
+          </button>
+          <button type="button" class="featured__arrow" (click)="scroll(1)" aria-label="Ver siguientes">
+            <app-icon name="chevron-right" />
+          </button>
+        </div>
+      </div>
+
+      <!-- Tablet/desktop: partial-peek scroll rail. -->
+      <ul class="featured__rail scroll-x" #rail appScrollFade (scroll)="onRailScroll()">
+        @for (d of dishes(); track d.id; let i = $index) {
+          <li appReveal [revealDelay]="i * 60">
+            <app-dish-card [dish]="d" variant="tile" [showCategory]="true" (select)="open($event)" />
+          </li>
+        }
+      </ul>
+
+      <!-- Mobile: one favorito at a time, swipe-only (no autoplay). -->
+      <div
+        class="featured__stage"
+        (pointerdown)="carousel.onPointerDown($event)"
+        (pointerup)="carousel.onPointerUp($event)"
+        (pointercancel)="carousel.onPointerUp($event)"
+      >
+        <div class="featured__track" [style.transform]="'translateX(' + -carousel.index() * 100 + '%)'">
+          @for (d of dishes(); track d.id) {
+            <div class="featured__slide">
+              <app-dish-card [dish]="d" variant="tile" [showCategory]="true" (select)="open($event)" />
+            </div>
+          }
+        </div>
+      </div>
+
+      <app-rail-dots class="featured__dots" [count]="dishes().length" [active]="carousel.index()" (select)="carousel.to($event)" />
+    </div>
+  </section>
+}

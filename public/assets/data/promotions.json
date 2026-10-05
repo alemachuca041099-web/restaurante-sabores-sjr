@@ -1,0 +1,31 @@
+{
+  "promotions": [
+    {
+      "id": "pozole-2-litros",
+      "title": "Pozole para 2 — 2 Litros",
+      "description": "Verde, blanco o rojo, con guarnición completa de lechuga, cebolla, limón, chile, rábano y tostadas, más 2 chiles capones, chicharrón, aguacate, crema y 4 tacos dorados. Agua gratis.",
+      "price": 300,
+      "image": "assets/images/promotions/pozole-2l.jpg",
+      "validity": "Paquete para 2 personas",
+      "active": true
+    },
+    {
+      "id": "paquete-sabor-ranchero",
+      "title": "Paquete Sabor Ranchero",
+      "description": "2 sopas aztecas, guacamole, frijoles, 300 g de arrachera, queso a la plancha, chistorra, nopales, cebolla y agua.",
+      "price": 370,
+      "image": "assets/images/promotions/sabor-ranchero.jpg",
+      "validity": "Para compartir",
+      "active": true
+    },
+    {
+      "id": "paquete-mar-y-tierra",
+      "title": "Paquete Mar y Tierra",
+      "description": "Arrachera y camarones a la parrilla con arroz, frijoles, ensalada, papas fritas, nopales, cebollas y agua.",
+      "price": 330,
+      "image": "assets/images/promotions/mar-y-tierra.jpg",
+      "validity": "Para compartir",
+      "active": true
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "id": "pozole-mesa",
+      "image": "assets/images/gallery/pozole-mesa-wide.jpg",
+      "alt": "Pozole rojo, blanco y verde servidos con guarniciones en cazuelas de barro",
+      "caption": "Pozole en sus tres colores",
+      "size": "wide"
+    },
+    {
+      "id": "chicharron-guarnicion",
+      "image": "assets/images/gallery/chicharron-guarnicion.jpg",
+      "alt": "Tabla de chicharrón, chiles rellenos de queso, limón, rábano y lechuga",
+      "caption": "Guarnición para el pozole",
+      "size": "normal"
+    },
+    {
+      "id": "mole-de-olla",
+      "image": "assets/images/gallery/mole-de-olla.jpg",
+      "alt": "Mole de olla con elote, calabaza, zanahoria y carne de res",
+      "caption": "Mole de olla",
+      "size": "tall"
+    },
+    {
+      "id": "tamales",
+      "image": "assets/images/gallery/tamales.jpg",
+      "alt": "Tamales envueltos en hoja de plátano servidos en un plato",
+      "caption": "Tamales",
+      "size": "normal"
+    },
+    {
+      "id": "pozole-guarnicion-2",
+      "image": "assets/images/gallery/pozole-guarnicion.jpg",
+      "alt": "Bowls de pozole verde, blanco y rojo con guarniciones",
+      "caption": "Pozole artesanal",
+      "size": "wide"
+    }
+  ]
+}

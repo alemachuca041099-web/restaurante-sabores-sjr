@@ -1,0 +1,23 @@
+@if (!done()) {
+  <div class="loader" role="status" aria-live="polite">
+    <span class="visually-hidden">Cargando {{ restaurant.name() }}…</span>
+
+    <div class="loader__mark" aria-hidden="true">
+      <svg class="loader__ring" viewBox="0 0 120 120">
+        <circle class="loader__ring-track" cx="60" cy="60" r="54" />
+        <circle class="loader__ring-progress" cx="60" cy="60" r="54" />
+      </svg>
+      <svg class="loader__emblem" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 58V34" />
+        <path d="M32 34c0-8-6-12-14-12 0 8 6 14 14 12z" />
+        <path d="M32 34c0-8 6-12 14-12 0 8-6 14-14 12z" />
+        <path d="M32 24c0-6-4-10-10-10 0 6 4 11 10 10z" />
+        <path d="M32 24c0-6 4-10 10-10 0 6-4 11-10 10z" />
+        <path d="M32 16c0-4-3-8-6-9 0 5 2 9 6 9z" />
+      </svg>
+    </div>
+
+    <p class="loader__word display" aria-hidden="true">{{ restaurant.name() }}</p>
+    <p class="loader__tagline" aria-hidden="true">{{ restaurant.tagline() }}</p>
+  </div>
+}

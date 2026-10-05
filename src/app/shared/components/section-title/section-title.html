@@ -1,0 +1,21 @@
+<div class="st" appReveal>
+  @if (eyebrow()) {
+    <p class="eyebrow rule rule--start">{{ eyebrow() }}</p>
+  }
+  @if (level() === 'h1') {
+    <h1 class="display st__title">
+      @for (p of parts(); track $index) {
+        @if (p.accent) { <em>{{ p.text }}</em> } @else { {{ p.text }} }
+      }
+    </h1>
+  } @else {
+    <h2 class="display st__title">
+      @for (p of parts(); track $index) {
+        @if (p.accent) { <em>{{ p.text }}</em> } @else { {{ p.text }} }
+      }
+    </h2>
+  }
+  @if (lead()) {
+    <p class="lead">{{ lead() }}</p>
+  }
+</div>

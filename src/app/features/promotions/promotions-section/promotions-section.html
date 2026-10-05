@@ -1,0 +1,73 @@
+@if (promotions.hasPromotions()) {
+  <section class="section promos" id="promociones" aria-labelledby="promos-title" appReveal>
+    <div class="container promos__head">
+      <app-section-title eyebrow="Por tiempo limitado" title="Promociones." />
+    </div>
+
+    <div class="container">
+      <div
+        class="stage"
+        [class.playing]="playing()"
+        (pointerdown)="onPointerDown($event)"
+        (pointerup)="onPointerUp($event)"
+        (pointercancel)="onPointerUp($event)"
+      >
+        <div class="track" [style.transform]="'translateX(' + -index() * 100 + '%)'">
+          @for (p of promotions.active(); track p.id; let k = $index) {
+            <article class="promo" [class.in]="k === index() && seen()" [attr.aria-hidden]="k === index() ? null : 'true'">
+              <figure class="visual">
+                <img [src]="p.image" [alt]="p.title" [appImgFallback]="p.title" loading="lazy" decoding="async" width="800" height="600" />
+                <span class="visual__glow" aria-hidden="true"></span>
+                <span class="visual__badge">{{ p.validity }}</span>
+                <span class="visual__num" aria-hidden="true">{{ pad(k + 1) }}</span>
+              </figure>
+
+              <div class="detail">
+                <h3 class="display detail__title">{{ p.title }}</h3>
+                <p class="detail__desc">{{ p.description }}</p>
+                <div class="detail__foot">
+                  @if (p.price !== null) {
+                    <span class="detail__price display">{{ p.price | mxn }}</span>
+                  }
+                  <a class="btn btn--sm" [href]="whatsapp.promotionInquiryUrl(p.title)" target="_blank" rel="noopener" [attr.aria-label]="'Preguntar por ' + p.title + ' en WhatsApp'">
+                    <app-icon name="whatsapp" [size]="15" />
+                    Preguntar
+                  </a>
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+
+        @if (promotions.active().length > 1) {
+          <button type="button" class="nav nav--prev" (click)="go(-1)" aria-label="Promoción anterior">
+            <app-icon name="chevron-left" [size]="18" />
+          </button>
+          <button type="button" class="nav nav--next" (click)="go(1)" aria-label="Siguiente promoción">
+            <app-icon name="chevron-right" [size]="18" />
+          </button>
+        }
+      </div>
+
+      @if (promotions.active().length > 1) {
+        <div class="rail" [class.playing]="playing()">
+          <button type="button" class="rail__pp" (click)="toggle()" [attr.aria-label]="playing() ? 'Pausar' : 'Reanudar'">
+            @if (playing()) {
+              <svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11"><rect x="6" y="5" width="4" height="14" /><rect x="14" y="5" width="4" height="14" /></svg>
+            } @else {
+              <svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11"><path d="M7 4l14 8-14 8V4z" /></svg>
+            }
+          </button>
+          <span class="rail__dots">
+            @for (p of promotions.active(); track p.id; let k = $index) {
+              <button type="button" class="rail__dot" [class.is-active]="k === index()" (click)="to(k)" [attr.aria-label]="'Ir a la promoción ' + (k + 1)">
+                <i></i>
+              </button>
+            }
+          </span>
+          <span class="rail__counter">{{ pad(index() + 1) }} / {{ pad(promotions.active().length) }}</span>
+        </div>
+      }
+    </div>
+  </section>
+}

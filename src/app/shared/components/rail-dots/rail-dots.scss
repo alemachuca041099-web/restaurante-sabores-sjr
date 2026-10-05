@@ -1,0 +1,30 @@
+:host {
+  display: block;
+}
+
+.rail-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: var(--spacing-sm);
+}
+
+.rail-dots__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-border);
+  transition: width var(--duration) var(--ease-out), background-color var(--duration-fast) ease;
+}
+
+.rail-dots__dot.is-active {
+  width: 20px;
+  background: var(--color-primary);
+}
+
+@media (min-width: 640px) {
+  .rail-dots {
+    display: none;
+  }
+}

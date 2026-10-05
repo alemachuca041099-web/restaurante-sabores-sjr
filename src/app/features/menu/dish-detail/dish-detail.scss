@@ -1,0 +1,115 @@
+.detail {
+  display: grid;
+}
+
+.detail__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--color-background);
+}
+
+.detail__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: media-in 1s var(--ease-out) both;
+}
+
+.detail__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--color-surface), transparent 40%);
+}
+
+.detail__badge {
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  z-index: 1;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: rgba(11, 10, 9, 0.7);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.detail__body {
+  display: grid;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-md) calc(var(--spacing-lg) + env(safe-area-inset-bottom));
+  margin-top: calc(-1 * var(--spacing-md));
+  position: relative;
+}
+
+.detail__name {
+  font-size: var(--text-3xl);
+}
+
+.detail__price {
+  font-size: var(--text-2xl);
+  color: var(--color-primary);
+}
+
+.detail__desc {
+  font-size: var(--text-lg);
+  color: var(--color-muted);
+}
+
+.detail__info {
+  display: grid;
+  gap: var(--spacing-xs);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.detail__info dt {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.detail__info dd {
+  margin: 0.2rem 0 0;
+  color: var(--color-muted);
+}
+
+.detail__action {
+  width: fit-content;
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+  margin-top: var(--spacing-sm);
+}
+
+@keyframes media-in {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (min-width: 760px) {
+  .detail__media {
+    aspect-ratio: auto;
+    height: 220px;
+  }
+
+  .detail__body {
+    padding: var(--spacing-lg);
+    gap: 0.6rem;
+  }
+
+  .detail__action {
+    margin-top: 0.2rem;
+  }
+}

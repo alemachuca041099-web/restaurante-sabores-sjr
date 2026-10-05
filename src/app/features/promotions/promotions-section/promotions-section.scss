@@ -1,0 +1,310 @@
+.promos__head {
+  margin-bottom: var(--spacing-md);
+}
+
+/* One promo at a time, full width — a slideshow, not a card rail. Same dark
+   card + gold glow treatment as .cc__card so it reads as part of the same
+   site instead of a dropped-in bright block. */
+.stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background:
+    radial-gradient(90% 60% at 50% -10%, rgba(201, 162, 74, 0.1), transparent 60%),
+    var(--color-surface);
+  box-shadow: var(--shadow-soft);
+  touch-action: pan-y;
+  isolation: isolate;
+}
+
+.track {
+  display: flex;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.promo {
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+}
+
+/* Content fades/rises in only once its slide becomes the active one. */
+.promo .visual__badge,
+.promo .detail > * {
+  opacity: 0;
+}
+
+.promo.in .visual__badge {
+  animation: promo-in 0.5s var(--ease-out) both;
+}
+
+.promo.in .detail__title {
+  animation: promo-in 0.5s var(--ease-out) 0.06s both;
+}
+
+.promo.in .detail__desc {
+  animation: promo-in 0.5s var(--ease-out) 0.12s both;
+}
+
+.promo.in .detail__foot {
+  animation: promo-in 0.5s var(--ease-out) 0.18s both;
+}
+
+@keyframes promo-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promo .visual__badge,
+  .promo .detail > * {
+    opacity: 1;
+  }
+  .promo.in .visual__badge,
+  .promo.in .detail__title,
+  .promo.in .detail__desc,
+  .promo.in .detail__foot {
+    animation: none;
+  }
+}
+
+/* Visual (image) side ---------------------------------------------------- */
+.visual {
+  position: relative;
+  min-height: 320px;
+  overflow: hidden;
+  background: var(--color-background);
+  border-right: 1px solid var(--color-border);
+}
+
+.visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-out);
+}
+
+.promo.in .visual img {
+  transform: scale(1.02);
+}
+
+.visual__glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(11, 10, 9, 0.1), transparent 35%, rgba(11, 10, 9, 0.7) 100%);
+}
+
+.visual__badge {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  z-index: 2;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: rgba(243, 237, 225, 0.94);
+  color: #0b0a09;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.visual__num {
+  position: absolute;
+  left: var(--spacing-sm);
+  bottom: 0.35em;
+  font-family: var(--font-display);
+  font-size: clamp(56px, 8vw, 96px);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(243, 237, 225, 0.32);
+  letter-spacing: -0.03em;
+}
+
+/* Detail side ------------------------------------------------------------- */
+.detail {
+  display: grid;
+  align-content: center;
+  gap: 0.6rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.detail__title {
+  font-size: var(--text-2xl);
+}
+
+.detail__desc {
+  color: var(--color-muted);
+  max-width: 42ch;
+}
+
+.detail__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+}
+
+.detail__price {
+  font-size: var(--text-2xl);
+}
+
+/* Arrows ------------------------------------------------------------------ */
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(243, 237, 225, 0.25);
+  background: rgba(11, 10, 9, 0.55);
+  backdrop-filter: blur(6px);
+  color: #f3ede1;
+  transition: background-color var(--duration-fast) ease, border-color var(--duration-fast) ease;
+}
+
+.nav:hover {
+  background: rgba(11, 10, 9, 0.75);
+  border-color: rgba(243, 237, 225, 0.4);
+}
+
+.nav--prev {
+  left: var(--spacing-sm);
+}
+
+.nav--next {
+  right: var(--spacing-sm);
+}
+
+/* Rail: play/pause + progress dots + counter ------------------------------ */
+.rail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: var(--spacing-md);
+}
+
+.rail__pp {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  transition: border-color var(--duration-fast) ease;
+}
+
+.rail__pp:hover {
+  border-color: var(--color-text);
+}
+
+.rail__dots {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.rail__dot {
+  position: relative;
+  width: 26px;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: var(--color-border);
+  overflow: hidden;
+  transition: width var(--duration) var(--ease-out);
+}
+
+.rail__dot i {
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: var(--color-text);
+  border-radius: inherit;
+}
+
+.rail__dot.is-active {
+  width: 46px;
+}
+
+.rail__dot.is-active i {
+  transform: scaleX(1);
+}
+
+.rail.playing .rail__dot.is-active i {
+  animation: promo-progress 6s linear both;
+}
+
+@keyframes promo-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail.playing .rail__dot.is-active i {
+    animation: none;
+  }
+}
+
+.rail__counter {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 760px) {
+  .promo {
+    grid-template-columns: 1fr;
+  }
+
+  .visual {
+    min-height: 180px;
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .visual__num {
+    font-size: 64px;
+  }
+
+  .detail {
+    padding: 1.25rem;
+  }
+
+  .detail__foot {
+    flex-wrap: wrap;
+  }
+
+  .nav {
+    top: 90px;
+    transform: none;
+    width: 36px;
+    height: 36px;
+  }
+
+  .rail__counter {
+    display: none;
+  }
+}
