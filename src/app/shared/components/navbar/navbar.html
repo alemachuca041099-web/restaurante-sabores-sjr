@@ -14,6 +14,7 @@
               [fragment]="link.fragment"
               [class.is-active]="isActive(link)"
               [attr.aria-current]="isActive(link) ? 'page' : null"
+              (click)="onLinkClick($event, link)"
             >
               {{ link.label }}
             </a>

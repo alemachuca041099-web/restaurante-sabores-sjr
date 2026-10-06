@@ -6,3 +6,4 @@ export * from './testimonial.service';
 export * from './whatsapp.service';
 export * from './seo.service';
 export * from './comida-corrida.service';
+export * from './section-transition.service';

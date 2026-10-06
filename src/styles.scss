@@ -87,6 +87,13 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* While the curtain (see SectionTransitionService) covers the screen, the
+   jump underneath must be instant — otherwise the smooth scroll would just
+   keep animating once the curtain opens again. */
+html.is-jumping {
+  scroll-behavior: auto !important;
+}
+
 body {
   margin: 0;
   background: var(--color-background);

@@ -3,7 +3,7 @@ import { Component, HostListener, computed, effect, inject, signal } from '@angu
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs';
-import { RestaurantService } from '../../../core/services';
+import { RestaurantService, SectionTransitionService } from '../../../core/services';
 import { Icon } from '../icon/icon';
 
 interface NavLink {
@@ -37,6 +37,7 @@ const NAV_LINKS: NavLink[] = [
 export class Navbar {
   private readonly router = inject(Router);
   private readonly document = inject(DOCUMENT);
+  private readonly transition = inject(SectionTransitionService);
   protected readonly restaurant = inject(RestaurantService);
 
   protected readonly links = NAV_LINKS;
@@ -91,5 +92,20 @@ export class Navbar {
     if (link.path === 'menu') return path.startsWith('menu');
     if (link.fragment) return path === '' && fragment === link.fragment;
     return path === '' && !fragment;
+  }
+
+  /** In-page section links jump behind the curtain instead of a visible
+   *  scroll. Cross-route links (Inicio from /menu, Menú) keep the default
+   *  router navigation untouched — there's no scroll to hide there. */
+  onLinkClick(event: MouseEvent, link: NavLink): void {
+    if (!link.fragment) return;
+    const currentPath = this.url().replace(/^\//, '').split('#')[0];
+    if (currentPath !== '') return;
+
+    event.preventDefault();
+    this.close();
+    this.transition.run(() => {
+      this.router.navigate(['/'], { fragment: link.fragment });
+    });
   }
 }

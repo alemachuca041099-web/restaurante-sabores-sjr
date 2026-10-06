@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, HostListener, inject, signal } from '@angular/core';
+import { SectionTransitionService } from '../../../core/services';
 import { Icon } from '../icon/icon';
 
 /** Floating "back to top" button, shown once the user has scrolled past the hero. */
@@ -12,6 +13,7 @@ import { Icon } from '../icon/icon';
 })
 export class ScrollTop {
   private readonly document = inject(DOCUMENT);
+  private readonly transition = inject(SectionTransitionService);
   protected readonly visible = signal(false);
 
   @HostListener('window:scroll')
@@ -21,6 +23,8 @@ export class ScrollTop {
   }
 
   scrollUp(): void {
-    this.document.defaultView?.scrollTo({ top: 0, behavior: 'smooth' });
+    this.transition.run(() => {
+      this.document.defaultView?.scrollTo({ top: 0, behavior: 'auto' });
+    });
   }
 }

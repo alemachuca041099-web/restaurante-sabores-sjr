@@ -1,0 +1,40 @@
+:host {
+  display: contents;
+}
+
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  pointer-events: none;
+}
+
+.curtain__panel {
+  position: absolute;
+  inset: 0;
+  width: 50%;
+  background: var(--color-background);
+  transition: transform 420ms var(--ease-out);
+}
+
+.curtain__panel--left {
+  left: 0;
+  transform: translateX(-100%);
+  box-shadow: 1px 0 0 0 var(--color-primary);
+}
+
+.curtain__panel--right {
+  left: 50%;
+  transform: translateX(100%);
+  box-shadow: -1px 0 0 0 var(--color-primary);
+}
+
+.curtain__panel.is-covering {
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curtain__panel {
+    transition: none;
+  }
+}
