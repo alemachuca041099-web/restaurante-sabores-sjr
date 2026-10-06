@@ -197,7 +197,9 @@
    needed) keeps real clearance regardless of how long the label gets. */
 @media (max-width: 759px) {
   .cc__cta {
-    max-width: calc(100% - 4.5rem);
+    max-width: calc(100% - 3.5rem);
+    padding-inline: 1.1rem;
+    font-size: var(--text-xs);
     white-space: normal;
     overflow: visible;
     text-align: center;
