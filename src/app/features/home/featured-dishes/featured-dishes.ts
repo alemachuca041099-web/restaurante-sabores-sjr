@@ -61,10 +61,30 @@ export class FeaturedDishes implements AfterViewInit {
   // a newer card before the previous animation finishes, and the browser
   // just smoothly redirects toward the latest target instead of restarting.
   protected scroll(direction: 1 | -1): void {
-    const total = this.dishes().length;
-    const next = Math.min(total - 1, Math.max(0, this.activeIndex() + direction));
+    const next = Math.min(this.lastReachableIndex(), Math.max(0, this.activeIndex() + direction));
     this.activeIndex.set(next);
     this.scrollToIndex(next);
+  }
+
+  // The rail doesn't scroll one full card per index once it's close to the
+  // end — the last few cards are already visible at max scroll without
+  // moving further. Clamping to dishes().length - 1 let a burst of clicks
+  // push activeIndex() past that point (reachable with no visible effect,
+  // since scrollIntoView on an already-visible card is a no-op); from
+  // there, clicking "anterior" needed several clicks before the rail
+  // visibly moved again, which read as it "not working" at the end. This
+  // finds the last index that still has room to scroll further right, so
+  // activeIndex() never drifts past what's actually reachable.
+  private lastReachableIndex(): number {
+    const el = this.rail()?.nativeElement;
+    if (!el) return 0;
+    const maxScrollLeft = el.scrollWidth - el.clientWidth;
+    const children = Array.from(el.children) as HTMLElement[];
+    let last = 0;
+    children.forEach((child, i) => {
+      if (child.offsetLeft <= maxScrollLeft) last = i;
+    });
+    return last;
   }
 
   protected scrollToIndex(index: number): void {
