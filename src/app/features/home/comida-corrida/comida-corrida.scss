@@ -191,6 +191,19 @@
   margin-top: 0.5rem;
 }
 
+/* The floating scroll-top button sits fixed in the bottom-right corner —
+   a centered, content-sized CTA can end up wide enough on a narrow phone
+   to reach right under it. Capping the width (wrapping to two lines if
+   needed) keeps real clearance regardless of how long the label gets. */
+@media (max-width: 759px) {
+  .cc__cta {
+    max-width: calc(100% - 4.5rem);
+    white-space: normal;
+    overflow: visible;
+    text-align: center;
+  }
+}
+
 @media (min-width: 900px) {
   .cc__layout {
     grid-template-columns: 0.9fr 1.1fr;
