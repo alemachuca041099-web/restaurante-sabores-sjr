@@ -230,6 +230,15 @@ button {
   position: relative;
 }
 
+/* On a small phone, --spacing-xl (up to 8rem) between every section adds up
+   to a lot of empty scroll — tighten it there without touching the
+   variable itself (still used for genuine large gaps elsewhere). */
+@media (max-width: 599px) {
+  .section {
+    padding-block: clamp(2.5rem, 2rem + 4vw, 3.5rem);
+  }
+}
+
 /* Buttons ------------------------------------------------------------- */
 .btn {
   --btn-bg: transparent;

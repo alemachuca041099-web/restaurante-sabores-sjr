@@ -106,9 +106,7 @@
       "image": "assets/images/menu/enmoladas-pollo.jpg",
       "featured": false,
       "available": true,
-      "tags": [
-        "casa"
-      ]
+      "tags": []
     },
     {
       "id": "comboy",
@@ -132,9 +130,7 @@
       "image": "assets/images/menu/ribeye.jpg",
       "featured": false,
       "available": true,
-      "tags": [
-        "casa"
-      ]
+      "tags": []
     },
     {
       "id": "arrachera",
@@ -145,9 +141,7 @@
       "image": "assets/images/promotions/sabor-ranchero.jpg",
       "featured": false,
       "available": true,
-      "tags": [
-        "casa"
-      ]
+      "tags": []
     },
     {
       "id": "pollo-cordon-blue",
@@ -158,9 +152,7 @@
       "image": "assets/images/menu/pollo-cordon-blue.jpg",
       "featured": false,
       "available": true,
-      "tags": [
-        "casa"
-      ]
+      "tags": []
     },
     {
       "id": "parrillada-4-personas",
@@ -184,9 +176,7 @@
       "image": "assets/images/menu/mojarra-frita.jpg",
       "featured": true,
       "available": true,
-      "tags": [
-        "casa"
-      ]
+      "tags": []
     },
     {
       "id": "salmon-naranja",
@@ -197,9 +187,7 @@
       "image": "assets/images/menu/salmon-naranja.jpg",
       "featured": true,
       "available": true,
-      "tags": [
-        "casa"
-      ]
+      "tags": []
     },
     {
       "id": "salmon-plancha",
@@ -210,9 +198,7 @@
       "image": "assets/images/menu/salmon-plancha.jpg",
       "featured": false,
       "available": true,
-      "tags": [
-        "casa"
-      ]
+      "tags": []
     },
     {
       "id": "filete-al-gusto",
@@ -223,9 +209,7 @@
       "image": "assets/images/menu/filete-al-gusto.jpg",
       "featured": false,
       "available": true,
-      "tags": [
-        "casa"
-      ]
+      "tags": []
     },
     {
       "id": "aguachile-mango-habanero",
@@ -275,9 +259,7 @@
       "image": "assets/images/menu/camarones-al-gusto.jpg",
       "featured": false,
       "available": true,
-      "tags": [
-        "casa"
-      ]
+      "tags": []
     },
     {
       "id": "cazuela-mariscos",
@@ -301,9 +283,7 @@
       "image": "assets/images/menu/tacos-gobernador.jpg",
       "featured": false,
       "available": true,
-      "tags": [
-        "casa"
-      ]
+      "tags": []
     },
     {
       "id": "coctel-camaron-chico",
@@ -314,9 +294,7 @@
       "image": "assets/images/menu/coctel-camaron.jpg",
       "featured": false,
       "available": true,
-      "tags": [
-        "casa"
-      ]
+      "tags": []
     },
     {
       "id": "coctel-camaron-grande",
@@ -327,9 +305,7 @@
       "image": "assets/images/menu/coctel-camaron.jpg",
       "featured": false,
       "available": true,
-      "tags": [
-        "casa"
-      ]
+      "tags": []
     }
   ]
 }
