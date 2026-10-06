@@ -45,31 +45,9 @@
 .hero__composition {
   position: relative;
   display: grid;
-  grid-template-areas: 'masthead' 'title' 'invitation' 'footer';
+  grid-template-areas: 'title' 'invitation' 'footer';
   gap: var(--spacing-md);
   min-width: 0;
-}
-
-.hero__masthead {
-  grid-area: masthead;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-xs) var(--spacing-md);
-  padding-bottom: var(--spacing-sm);
-  border-bottom: 1px solid rgba(243, 237, 225, 0.25);
-}
-
-.hero__brand {
-  color: var(--color-secondary);
-  font-size: var(--text-2xl);
-}
-
-.hero__location {
-  color: rgba(243, 237, 225, 0.75);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-wide);
 }
 
 .hero__title {
@@ -132,9 +110,11 @@
   letter-spacing: 0.08em;
 }
 
+/* Deliberately quiet on every breakpoint — "Ver menú" stays the one
+   unambiguous dominant action instead of two competing outlined pills. */
 .hero__reserve {
   color: var(--color-secondary);
-  border-color: rgba(243, 237, 225, 0.4);
+  padding-inline: 0.5rem;
 }
 
 .hero__reserve:hover,
@@ -211,13 +191,6 @@
 @media (max-width: 699px) {
   .hero__tags {
     display: none;
-  }
-
-  /* De-emphasize the secondary CTA on mobile — one dominant button
-     ("Ver menú") reads more clearly than two competing outlined pills. */
-  .hero__reserve {
-    border-color: transparent;
-    padding-inline: 0.5rem;
   }
 }
 
