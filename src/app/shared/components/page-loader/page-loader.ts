@@ -24,7 +24,11 @@ export class PageLoader {
   private readonly reduceMotion =
     this.document.defaultView?.matchMedia('(prefers-reduced-motion: reduce)').matches ?? false;
 
-  private readonly minVisible = this.reduceMotion ? 0 : 400;
+  // Long enough for the wordmark + tagline fade-in (delay 0.5s + duration
+  // 0.8s = 1.3s, see page-loader.scss) to actually finish before the leave
+  // transition starts — cutting it short mid-animation is what made this
+  // feel rushed instead of fluid.
+  private readonly minVisible = this.reduceMotion ? 0 : 1400;
   private readonly startedAt = Date.now();
 
   constructor() {
@@ -35,7 +39,7 @@ export class PageLoader {
     const fontsReady = this.document.fonts?.ready ?? Promise.resolve();
     void fontsReady.then(() => this.scheduleLeave());
     // Safety net in case fonts.ready never resolves (older engines).
-    setTimeout(() => this.scheduleLeave(), 1500);
+    setTimeout(() => this.scheduleLeave(), 2200);
   }
 
   private scheduleLeave(): void {
@@ -48,7 +52,7 @@ export class PageLoader {
   private leave(): void {
     if (this.leaving()) return;
     this.leaving.set(true);
-    const transitionMs = this.reduceMotion ? 0 : 400;
+    const transitionMs = this.reduceMotion ? 0 : 550;
     setTimeout(() => {
       this.done.set(true);
       this.finished.emit();

@@ -10,12 +10,12 @@
   place-items: center;
   gap: var(--spacing-sm);
   background: var(--color-background);
-  transition: opacity 0.4s var(--ease-out), visibility 0s linear 0s;
+  transition: opacity var(--duration-slow) var(--ease-out), visibility 0s linear 0s;
 }
 
 :host(.is-leaving) .loader {
   opacity: 0;
-  transition: opacity 0.4s var(--ease-out), visibility 0s linear 0.4s;
+  transition: opacity var(--duration-slow) var(--ease-out), visibility 0s linear var(--duration-slow);
 }
 
 .loader__mark {
