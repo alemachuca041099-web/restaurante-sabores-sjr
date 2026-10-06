@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Hero } from '../hero/hero';
 import { ComidaCorrida } from '../comida-corrida/comida-corrida';
 import { FeaturedDishes } from '../featured-dishes/featured-dishes';
-import { SectionNav } from '../section-nav/section-nav';
 import { PromotionsSection } from '../../promotions/promotions-section/promotions-section';
 import { Story } from '../story/story';
 import { GalleryPreview } from '../gallery-preview/gallery-preview';
@@ -15,7 +14,6 @@ import { Location } from '../location/location';
     Hero,
     ComidaCorrida,
     FeaturedDishes,
-    SectionNav,
     PromotionsSection,
     Story,
     GalleryPreview,
@@ -23,7 +21,6 @@ import { Location } from '../location/location';
     Location,
   ],
   template: `
-    <app-section-nav />
     <app-hero />
     <app-promotions-section />
     <app-comida-corrida />
