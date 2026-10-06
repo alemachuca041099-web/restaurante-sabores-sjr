@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Hero } from '../hero/hero';
 import { ComidaCorrida } from '../comida-corrida/comida-corrida';
-import { Discover } from '../discover/discover';
 import { FeaturedDishes } from '../featured-dishes/featured-dishes';
 import { PromotionsSection } from '../../promotions/promotions-section/promotions-section';
 import { Story } from '../story/story';
@@ -14,7 +13,6 @@ import { Location } from '../location/location';
   imports: [
     Hero,
     ComidaCorrida,
-    Discover,
     FeaturedDishes,
     PromotionsSection,
     Story,
@@ -26,7 +24,6 @@ import { Location } from '../location/location';
     <app-hero />
     <app-promotions-section />
     <app-comida-corrida />
-    <app-discover />
     <app-featured-dishes />
     <app-story />
     <app-gallery-preview />
