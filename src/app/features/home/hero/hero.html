@@ -23,7 +23,7 @@
     <div class="hero__invitation">
       <p class="hero__sub">{{ restaurant.heroDescriptor() }}</p>
       <div class="hero__actions">
-        <a class="btn btn--primary" routerLink="/menu">
+        <a class="btn btn--primary" href="/menu" (click)="goToMenu($event)">
           <app-icon name="menu-card" [size]="17" />
           Ver menú
         </a>

@@ -1,6 +1,6 @@
 <header class="nav">
   <div class="nav__inner container">
-    <a class="nav__brand" routerLink="/" (click)="close()" aria-label="SABORES, ir al inicio">
+    <a class="nav__brand" href="/" (click)="onBrandClick($event)" aria-label="SABORES, ir al inicio">
       <img class="nav__logo" src="assets/images/brand/logo.png" alt="" width="56" height="56" />
       <span class="nav__wordmark">{{ restaurant.name() }}</span>
     </a>
@@ -10,8 +10,7 @@
         @for (link of links; track link.label) {
           <li>
             <a
-              [routerLink]="'/' + link.path"
-              [fragment]="link.fragment"
+              [href]="hrefFor(link)"
               [class.is-active]="isActive(link)"
               [attr.aria-current]="isActive(link) ? 'page' : null"
               (click)="onLinkClick($event, link)"
@@ -23,7 +22,9 @@
       </ul>
     </nav>
 
-    <a class="btn btn--primary nav__cta" routerLink="/menu"><app-icon name="menu-card" [size]="15" />Ver menú</a>
+    <a class="btn btn--primary nav__cta" href="/menu" (click)="onMenuCtaClick($event)">
+      <app-icon name="menu-card" [size]="15" />Ver menú
+    </a>
 
     <button
       class="nav__burger"
@@ -44,7 +45,7 @@
     <ul class="drawer__list">
       @for (link of links; track link.label; let i = $index) {
         <li [style.--i]="i">
-          <a [routerLink]="'/' + link.path" [fragment]="link.fragment" (click)="close()">
+          <a [href]="hrefFor(link)" (click)="onLinkClick($event, link)">
             <span class="drawer__index">0{{ i + 1 }}</span>
             <span class="drawer__label display">{{ link.label }}</span>
           </a>
@@ -52,7 +53,9 @@
       }
     </ul>
     <div class="drawer__footer">
-      <a class="btn btn--primary" routerLink="/menu" (click)="close()"><app-icon name="menu-card" [size]="16" />Ver menú</a>
+      <a class="btn btn--primary" href="/menu" (click)="onMenuCtaClick($event)">
+        <app-icon name="menu-card" [size]="16" />Ver menú
+      </a>
       <p class="drawer__tagline">{{ restaurant.tagline() }}</p>
     </div>
   </nav>

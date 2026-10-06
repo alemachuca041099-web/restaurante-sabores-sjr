@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, HostListener, computed, effect, inject, signal } from '@angular/core';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs';
 import { RestaurantService, SectionTransitionService } from '../../../core/services';
@@ -25,7 +25,7 @@ const NAV_LINKS: NavLink[] = [
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, Icon],
+  imports: [Icon],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
   host: {
@@ -94,18 +94,37 @@ export class Navbar {
     return path === '' && !fragment;
   }
 
-  /** In-page section links jump behind the curtain instead of a visible
-   *  scroll. Cross-route links (Inicio from /menu, Menú) keep the default
-   *  router navigation untouched — there's no scroll to hide there. */
-  onLinkClick(event: MouseEvent, link: NavLink): void {
-    if (!link.fragment) return;
-    const currentPath = this.url().replace(/^\//, '').split('#')[0];
-    if (currentPath !== '') return;
+  /** Plain href (not [routerLink]) — these links are intercepted in
+   *  onLinkClick to run behind the curtain instead, and a routerLink
+   *  directive on the same element would fire its own navigation too. */
+  hrefFor(link: NavLink): string {
+    const base = link.path ? '/' + link.path : '/';
+    return link.fragment ? `${base}#${link.fragment}` : base;
+  }
 
+  /** Every nav link — same-page section jump or a different route — runs
+   *  behind the curtain instead of a visible scroll or a blank-flash page
+   *  swap. Middle-click/ctrl/cmd-click etc. fall through to the native
+   *  link so "open in new tab" still works. */
+  onLinkClick(event: MouseEvent, link: NavLink): void {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     this.close();
-    this.transition.run(() => {
-      this.router.navigate(['/'], { fragment: link.fragment });
-    });
+    const commands = link.path ? ['/' + link.path] : ['/'];
+    this.transition.run(() => this.router.navigate(commands, link.fragment ? { fragment: link.fragment } : {}));
+  }
+
+  onBrandClick(event: MouseEvent): void {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    this.close();
+    this.transition.run(() => this.router.navigate(['/']));
+  }
+
+  onMenuCtaClick(event: MouseEvent): void {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    this.close();
+    this.transition.run(() => this.router.navigate(['/menu']));
   }
 }

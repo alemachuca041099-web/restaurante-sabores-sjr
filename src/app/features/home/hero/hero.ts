@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, HostListener, OnDestroy, inject, signal, viewChild } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { RestaurantService, WhatsappService } from '../../../core/services';
+import { Router } from '@angular/router';
+import { RestaurantService, SectionTransitionService, WhatsappService } from '../../../core/services';
 import { Icon } from '../../../shared/components/icon/icon';
 
 const HERO_IMAGE = {
@@ -16,7 +16,7 @@ const PARALLAX_RANGE = 24;
 
 @Component({
   selector: 'app-hero',
-  imports: [RouterLink, Icon],
+  imports: [Icon],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
 })
@@ -24,6 +24,9 @@ export class Hero implements OnDestroy {
   protected readonly restaurant = inject(RestaurantService);
   protected readonly whatsapp = inject(WhatsappService);
   protected readonly image = HERO_IMAGE;
+
+  private readonly router = inject(Router);
+  private readonly transition = inject(SectionTransitionService);
 
   private readonly document = inject(DOCUMENT);
   private readonly heroEl = viewChild<ElementRef<HTMLElement>>('heroEl');
@@ -55,5 +58,11 @@ export class Hero implements OnDestroy {
 
   ngOnDestroy(): void {
     cancelAnimationFrame(this.rafId);
+  }
+
+  protected goToMenu(event: MouseEvent): void {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    this.transition.run(() => this.router.navigate(['/menu']));
   }
 }

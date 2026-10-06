@@ -23,10 +23,15 @@ export class SectionTransitionService {
   private readonly openMs = 420;
   private busy = false;
 
-  /** Runs `jump` (the actual scroll/navigation) hidden behind the curtain. */
-  run(jump: () => void): void {
+  /**
+   * Runs `jump` (a scroll, or a route navigation) hidden behind the
+   * curtain. When `jump` returns a promise — a route change, which may
+   * still be loading a lazy chunk — the curtain stays closed until it
+   * resolves, so it never opens onto a half-loaded page.
+   */
+  run(jump: () => unknown): void {
     if (this.reduceMotion || this.busy) {
-      jump();
+      void jump();
       return;
     }
     this.busy = true;
@@ -34,8 +39,10 @@ export class SectionTransitionService {
     html.classList.add('is-jumping');
     this.covering.set(true);
 
-    setTimeout(() => {
-      jump();
+    setTimeout(async () => {
+      const result = jump();
+      if (result instanceof Promise) await result;
+
       setTimeout(() => {
         this.covering.set(false);
         setTimeout(() => {
