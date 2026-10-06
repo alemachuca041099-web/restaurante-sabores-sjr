@@ -47,6 +47,10 @@
   animation: promo-in 0.5s var(--ease-out) 0.12s both;
 }
 
+.promo.in .detail__more {
+  animation: promo-in 0.5s var(--ease-out) 0.15s both;
+}
+
 .promo.in .detail__foot {
   animation: promo-in 0.5s var(--ease-out) 0.18s both;
 }
@@ -70,6 +74,7 @@
   .promo.in .visual__badge,
   .promo.in .detail__title,
   .promo.in .detail__desc,
+  .promo.in .detail__more,
   .promo.in .detail__foot {
     animation: none;
   }
@@ -146,6 +151,18 @@
 .detail__desc {
   color: var(--color-muted);
   max-width: 42ch;
+}
+
+.detail__more {
+  display: none;
+  align-self: flex-start;
+  padding: 0;
+  color: var(--color-primary);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .detail__foot {
@@ -286,11 +303,28 @@
   }
 
   .visual__num {
-    font-size: 64px;
+    display: none;
   }
 
   .detail {
     padding: 1.25rem;
+  }
+
+  .detail__desc {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .detail__desc.is-expanded {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+
+  .detail__more {
+    display: inline-flex;
   }
 
   .detail__foot {

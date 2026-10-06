@@ -24,7 +24,12 @@
 
               <div class="detail">
                 <h3 class="display detail__title">{{ p.title }}</h3>
-                <p class="detail__desc">{{ p.description }}</p>
+                <p class="detail__desc" [class.is-expanded]="descExpanded()">{{ p.description }}</p>
+                @if (isLong(p.description)) {
+                  <button type="button" class="detail__more" (click)="toggleDesc()">
+                    {{ descExpanded() ? 'Ver menos' : 'Ver qué incluye' }}
+                  </button>
+                }
                 <div class="detail__foot">
                   @if (p.price !== null) {
                     <span class="detail__price display">{{ p.price | mxn }}</span>

@@ -3,7 +3,7 @@
   "subtitle": "Sabores de la casa",
   "price": 130,
   "includes": ["Sopa del día", "Un guiso a elegir", "Guarnición", "Agua del día", "Postre"],
-  "note": "El guiso cambia cada día. Pregunta por las opciones disponibles hoy.",
+  "note": "El guiso cambia cada día — confirma disponibilidad.",
   "image": "assets/images/menu/comida-corrida.jpg",
   "guisos": [
     { "id": "higado-encebollado", "name": "Hígado encebollado" },

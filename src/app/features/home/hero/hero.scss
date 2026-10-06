@@ -208,6 +208,19 @@
   }
 }
 
+@media (max-width: 699px) {
+  .hero__tags {
+    display: none;
+  }
+
+  /* De-emphasize the secondary CTA on mobile — one dominant button
+     ("Ver menú") reads more clearly than two competing outlined pills. */
+  .hero__reserve {
+    border-color: transparent;
+    padding-inline: 0.5rem;
+  }
+}
+
 @media (min-width: 700px) {
   .hero__title {
     font-size: clamp(6.5rem, 12vw, 9rem);

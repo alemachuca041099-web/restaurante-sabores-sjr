@@ -27,6 +27,7 @@ export class PromotionsSection implements AfterViewInit, OnDestroy {
 
   protected readonly index = signal(0);
   protected readonly playing = signal(true);
+  protected readonly descExpanded = signal(false);
   /** True once the section has entered the viewport at least once — gates the slide-in animation so it never fires already-scrolled-past. */
   protected readonly seen = signal(false);
 
@@ -73,22 +74,34 @@ export class PromotionsSection implements AfterViewInit, OnDestroy {
   private advance(): void {
     const total = this.promotions.active().length;
     this.index.update((i) => (i + 1) % total);
+    this.descExpanded.set(false);
   }
 
   protected go(direction: 1 | -1): void {
     const total = this.promotions.active().length;
     this.index.update((i) => (i + direction + total) % total);
+    this.descExpanded.set(false);
     this.arm();
   }
 
   protected to(i: number): void {
     this.index.set(i);
+    this.descExpanded.set(false);
     this.arm();
   }
 
   protected toggle(): void {
     this.playing.update((v) => !v);
     this.arm();
+  }
+
+  protected toggleDesc(): void {
+    this.descExpanded.update((v) => !v);
+  }
+
+  /** Heuristic for whether a description needs the mobile line-clamp toggle at all. */
+  protected isLong(text: string): boolean {
+    return text.length > 140;
   }
 
   protected onPointerDown(event: PointerEvent): void {

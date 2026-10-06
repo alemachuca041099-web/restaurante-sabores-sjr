@@ -9,13 +9,8 @@
         </figure>
 
         <article class="cc__card" appReveal>
-          <svg class="cc__spark" viewBox="0 0 40 40" aria-hidden="true">
-            <path d="M20 4l3.2 12.8L36 20l-12.8 3.2L20 36l-3.2-12.8L4 20l12.8-3.2z" />
-          </svg>
-
           <p class="cc__subtitle display" id="cc-title">{{ cc.subtitle }}</p>
           <p class="cc__price display">{{ cc.price | mxn }}</p>
-          <p class="cc__note">{{ cc.note }}</p>
 
           <div class="cc__rule" aria-hidden="true"><span></span></div>
 
@@ -27,17 +22,23 @@
 
           <div class="cc__rule" aria-hidden="true"><span></span></div>
 
-          <h3 class="eyebrow cc__guisos-title">Guisos disponibles hoy</h3>
-          <ul class="cc__guisos">
-            @for (g of cc.guisos; track g.id) {
-              <li>
-                {{ g.name }}
-                @if (g.note) {
-                  <span class="cc__guiso-note">{{ g.note }}</span>
-                }
-              </li>
-            }
-          </ul>
+          <details class="cc__guisos-details">
+            <summary class="cc__guisos-summary">
+              <span>Ver los {{ cc.guisos.length }} guisos de hoy</span>
+              <app-icon name="chevron-right" [size]="14" class="cc__guisos-chevron" />
+            </summary>
+            <p class="cc__note">{{ cc.note }}</p>
+            <ul class="cc__guisos">
+              @for (g of cc.guisos; track g.id) {
+                <li>
+                  {{ g.name }}
+                  @if (g.note) {
+                    <span class="cc__guiso-note">{{ g.note }}</span>
+                  }
+                </li>
+              }
+            </ul>
+          </details>
 
           @if (whatsapp.ready()) {
             <a class="btn btn--primary cc__cta" [href]="whatsapp.comidaCorridaInquiryUrl()" target="_blank" rel="noopener">
