@@ -65,7 +65,7 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --duration-fast: 200ms;
   --duration: 450ms;
-  --duration-slow: 900ms;
+  --duration-slow: 550ms;
 
   --shadow-soft: 0 20px 60px -30px rgba(0, 0, 0, 0.8);
 
@@ -379,7 +379,7 @@ button {
 /* Reveal on scroll ---------------------------------------------------- */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(16px);
   transition:
     opacity var(--duration-slow) var(--ease-out),
     transform var(--duration-slow) var(--ease-out);

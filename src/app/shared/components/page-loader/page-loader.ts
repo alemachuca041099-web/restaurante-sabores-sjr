@@ -24,7 +24,7 @@ export class PageLoader {
   private readonly reduceMotion =
     this.document.defaultView?.matchMedia('(prefers-reduced-motion: reduce)').matches ?? false;
 
-  private readonly minVisible = this.reduceMotion ? 0 : 900;
+  private readonly minVisible = this.reduceMotion ? 0 : 400;
   private readonly startedAt = Date.now();
 
   constructor() {
@@ -35,7 +35,7 @@ export class PageLoader {
     const fontsReady = this.document.fonts?.ready ?? Promise.resolve();
     void fontsReady.then(() => this.scheduleLeave());
     // Safety net in case fonts.ready never resolves (older engines).
-    setTimeout(() => this.scheduleLeave(), 2500);
+    setTimeout(() => this.scheduleLeave(), 1500);
   }
 
   private scheduleLeave(): void {
@@ -48,7 +48,7 @@ export class PageLoader {
   private leave(): void {
     if (this.leaving()) return;
     this.leaving.set(true);
-    const transitionMs = this.reduceMotion ? 0 : 700;
+    const transitionMs = this.reduceMotion ? 0 : 400;
     setTimeout(() => {
       this.done.set(true);
       this.finished.emit();
