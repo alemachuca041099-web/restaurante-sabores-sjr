@@ -1,0 +1,14 @@
+<nav class="section-nav" aria-label="Ir a una sección">
+  @for (item of items(); track item.id) {
+    <a
+      [href]="'#' + item.id"
+      class="section-nav__dot"
+      [class.is-active]="activeId() === item.id"
+      [attr.aria-current]="activeId() === item.id ? 'true' : null"
+      [title]="item.label"
+      (click)="selectNow(item.id)"
+    >
+      <span class="visually-hidden">{{ item.label }}</span>
+    </a>
+  }
+</nav>
