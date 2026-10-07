@@ -1,54 +1,54 @@
 <section class="hero" id="inicio" aria-labelledby="hero-title" #heroEl>
-  <div class="container">
-    <div class="hero__grid">
-      <div class="hero__text">
-        <h1 class="display hero__title" id="hero-title">
-          <span class="hero__opening">El sabor</span>
-          <span class="hero__closing">
-            <span class="hero__bridge">que se</span>
-            <em>disfruta.</em>
-          </span>
-        </h1>
+  <img
+    class="hero__bg"
+    [src]="image.src"
+    [alt]="image.alt"
+    [style.transform]="'translateY(' + parallaxY() + '%)'"
+    decoding="async"
+    fetchpriority="high"
+    width="2048"
+    height="1010"
+  />
+  <span class="hero__scrim" aria-hidden="true"></span>
 
-        <p class="hero__sub">{{ restaurant.heroDescriptor() }}</p>
+  <div class="container hero__composition">
+    <p class="hero__kicker" aria-hidden="true">Cocina de casa</p>
 
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="/menu" (click)="goToMenu($event)">
-            <app-icon name="menu-card" [size]="17" />
-            Ver menú
+    <h1 class="display hero__title" id="hero-title">
+      <span class="hero__opening">El sabor</span>
+      <span class="hero__closing">
+        <span class="hero__bridge">que se</span>
+        <em>disfruta.</em>
+      </span>
+    </h1>
+
+    <div class="hero__invitation">
+      <p class="hero__sub">{{ restaurant.heroDescriptor() }}</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="/menu" (click)="goToMenu($event)">
+          <app-icon name="menu-card" [size]="17" />
+          Ver menú
+        </a>
+        @if (whatsapp.ready()) {
+          <a class="btn btn--ghost hero__reserve" [href]="whatsapp.defaultUrl()" target="_blank" rel="noopener">
+            <app-icon name="whatsapp" [size]="17" />
+            Reservar por WhatsApp
           </a>
-          @if (whatsapp.ready()) {
-            <a class="btn btn--ghost hero__reserve" [href]="whatsapp.defaultUrl()" target="_blank" rel="noopener">
-              <app-icon name="whatsapp" [size]="17" />
-              Reservar por WhatsApp
-            </a>
-          }
-        </div>
-
-        @if (restaurant.cuisineTags().length) {
-          <ul class="hero__tags" aria-label="Nuestra cocina">
-            @for (tag of restaurant.cuisineTags(); track tag) {
-              <li>{{ tag }}</li>
-            }
-          </ul>
         }
       </div>
-
-      <figure class="hero__media" appReveal>
-        <img
-          [src]="image.src"
-          [alt]="image.alt"
-          [style.transform]="'translateY(' + parallaxY() + '%)'"
-          decoding="async"
-          fetchpriority="high"
-          width="2048"
-          height="1010"
-        />
-      </figure>
     </div>
 
-    <a class="hero__scroll" href="#comida-corrida">
-      Descubre más <span aria-hidden="true">↓</span>
-    </a>
+    <div class="hero__footer">
+      @if (restaurant.cuisineTags().length) {
+        <ul class="hero__tags" aria-label="Nuestra cocina">
+          @for (tag of restaurant.cuisineTags(); track tag) {
+            <li>{{ tag }}</li>
+          }
+        </ul>
+      }
+      <a class="hero__scroll" href="#comida-corrida">
+        Descubre más <span aria-hidden="true">↓</span>
+      </a>
+    </div>
   </div>
 </section>

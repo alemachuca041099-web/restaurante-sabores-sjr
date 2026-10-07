@@ -1,7 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, HostListener, OnDestroy, inject, signal, viewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { RevealDirective } from '../../../core/directives/reveal.directive';
 import { RestaurantService, SectionTransitionService, WhatsappService } from '../../../core/services';
 import { Icon } from '../../../shared/components/icon/icon';
 
@@ -10,14 +9,14 @@ const HERO_IMAGE = {
   alt: 'Mole de olla con elote, calabaza y carne de res servido en cazuela de barro',
 };
 
-/** Max vertical drift of the framed photo, as % of its own box — must stay
- *  within the extra height .hero__media img has in hero.scss (124%) so the
+/** Max vertical drift of the background photo, as % of its own box — must
+ *  stay within the extra height .hero__bg has in hero.scss (156%) so the
  *  travel never exposes an empty edge. */
-const PARALLAX_RANGE = 10;
+const PARALLAX_RANGE = 24;
 
 @Component({
   selector: 'app-hero',
-  imports: [Icon, RevealDirective],
+  imports: [Icon],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
 })
