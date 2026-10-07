@@ -2,9 +2,41 @@
   border-top: 1px solid var(--color-border-soft);
 }
 
+/* Mobile-first: the swipeable stage below is the default; the grid only
+   takes over at the tablet/desktop breakpoint. */
 .story__grid {
+  display: none;
+}
+
+.story__stage {
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+  transition: height 0.3s var(--ease-out);
+}
+
+.story__track {
+  display: flex;
+  align-items: flex-start;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.story__slide {
+  flex: 0 0 100%;
   display: grid;
+  align-content: start;
   gap: var(--spacing-lg);
+  padding-inline: 1px;
+}
+
+/* No preceding content in the same slide to separate from. */
+.story__slide .story__facts {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.story__dots {
+  margin-top: var(--spacing-md);
 }
 
 .story__media {
@@ -85,6 +117,18 @@
   margin: 0.3rem 0 0;
   font-family: var(--font-display);
   font-size: var(--text-lg);
+}
+
+@media (min-width: 640px) {
+  .story__grid {
+    display: grid;
+    gap: var(--spacing-lg);
+  }
+
+  .story__stage,
+  .story__dots {
+    display: none;
+  }
 }
 
 @media (min-width: 900px) {

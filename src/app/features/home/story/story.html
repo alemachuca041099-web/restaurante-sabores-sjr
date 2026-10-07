@@ -1,14 +1,15 @@
 @if (restaurant.story(); as story) {
   <section class="section story" id="historia" aria-labelledby="story-title">
-    <div class="container story__grid">
-      <figure class="story__media" appReveal>
-        <img [src]="story.image" [alt]="story.imageAlt" [appImgFallback]="restaurant.name()" loading="lazy" decoding="async" width="900" height="1100" />
-        <img class="story__seal" src="assets/images/brand/logo.png" alt="" width="120" height="120" loading="lazy" />
-      </figure>
+    <div class="container">
+      <ng-template #mediaTpl>
+        <figure class="story__media" appReveal>
+          <img [src]="story.image" [alt]="story.imageAlt" [appImgFallback]="restaurant.name()" loading="lazy" decoding="async" width="900" height="1100" />
+          <img class="story__seal" src="assets/images/brand/logo.png" alt="" width="84" height="84" loading="lazy" />
+        </figure>
+      </ng-template>
 
-      <div class="story__body">
+      <ng-template #textTpl>
         <app-section-title [eyebrow]="story.eyebrow" [title]="story.title" accent="sabor" />
-
         <div class="story__text" appReveal>
           @for (p of story.paragraphs; track $index) {
             <p>{{ p }}</p>
@@ -17,18 +18,48 @@
             <p class="story__placeholder-note">Texto de ejemplo — personalízalo con la historia real de SABORES.</p>
           }
         </div>
+      </ng-template>
 
-        @if (story.highlights.length) {
-          <dl class="story__facts" appReveal>
-            @for (h of story.highlights; track h.label) {
-              <div>
-                <dt>{{ h.label }}</dt>
-                <dd class="display">{{ h.value }}</dd>
-              </div>
-            }
-          </dl>
-        }
+      <ng-template #factsTpl>
+        <dl class="story__facts" appReveal>
+          @for (h of story.highlights; track h.label) {
+            <div>
+              <dt>{{ h.label }}</dt>
+              <dd class="display">{{ h.value }}</dd>
+            </div>
+          }
+        </dl>
+      </ng-template>
+
+      <!-- Tablet/desktop: side-by-side grid. -->
+      <div class="story__grid">
+        <ng-container [ngTemplateOutlet]="mediaTpl" />
+        <div class="story__body">
+          <ng-container [ngTemplateOutlet]="textTpl" />
+          @if (story.highlights.length) {
+            <ng-container [ngTemplateOutlet]="factsTpl" />
+          }
+        </div>
       </div>
+
+      <!-- Mobile: swipeable cards, one at a time — same mechanic as "Lo que nos distingue". -->
+      <div
+        class="story__stage"
+        [style.height.px]="stageHeight()"
+        (pointerdown)="carousel.onPointerDown($event)"
+        (pointerup)="carousel.onPointerUp($event)"
+        (pointercancel)="carousel.onPointerUp($event)"
+      >
+        <div #track class="story__track" [style.transform]="'translateX(' + -carousel.index() * 100 + '%)'">
+          <div class="story__slide"><ng-container [ngTemplateOutlet]="mediaTpl" /></div>
+          <div class="story__slide"><ng-container [ngTemplateOutlet]="textTpl" /></div>
+          @if (story.highlights.length) {
+            <div class="story__slide"><ng-container [ngTemplateOutlet]="factsTpl" /></div>
+          }
+        </div>
+      </div>
+
+      <app-rail-dots class="story__dots" [count]="slideCount()" [active]="carousel.index()" (select)="carousel.to($event)" />
     </div>
   </section>
 }
