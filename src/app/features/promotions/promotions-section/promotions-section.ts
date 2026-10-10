@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, inject, signal } from '@angular/core';
 import { ImgFallbackDirective } from '../../../core/directives/img-fallback.directive';
 import { RevealDirective } from '../../../core/directives/reveal.directive';
+import { createScrollTilt } from '../../../core/utils/scroll-tilt';
 import { MxnPipe } from '../../../core/pipes/mxn.pipe';
 import { PromotionService, WhatsappService } from '../../../core/services';
 import { Icon } from '../../../shared/components/icon/icon';
@@ -30,6 +31,11 @@ export class PromotionsSection implements AfterViewInit, OnDestroy {
   protected readonly descExpanded = signal(false);
   /** True once the section has entered the viewport at least once — gates the slide-in animation so it never fires already-scrolled-past. */
   protected readonly seen = signal(false);
+
+  /** Whole-carousel 3D entrance tied to scroll, see animaciones/scroll-progreso-3d.md.
+   *  Independent of the per-slide "becomes active" fade below — this only
+   *  plays once as the section scrolls into view. */
+  protected readonly tilt = createScrollTilt();
 
   private timer?: ReturnType<typeof setInterval>;
   private io?: IntersectionObserver;

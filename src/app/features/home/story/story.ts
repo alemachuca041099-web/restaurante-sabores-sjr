@@ -3,6 +3,7 @@ import { AfterViewInit, Component, ElementRef, computed, effect, inject, signal,
 import { ImgFallbackDirective } from '../../../core/directives/img-fallback.directive';
 import { RevealDirective } from '../../../core/directives/reveal.directive';
 import { createSlideCarousel } from '../../../core/utils/slide-carousel';
+import { createScrollTilt } from '../../../core/utils/scroll-tilt';
 import { RestaurantService } from '../../../core/services';
 import { RailDots } from '../../../shared/components/rail-dots/rail-dots';
 import { SectionTitle } from '../../../shared/components/section-title/section-title';
@@ -33,6 +34,10 @@ export class Story implements AfterViewInit {
    *  without this, the flex track would stretch every slide to match the
    *  tallest one (the photo), leaving huge dead space on the short ones. */
   protected readonly stageHeight = signal<number | null>(null);
+
+  /** 3D entrance for the whole mobile carousel, see
+   *  animaciones/scroll-progreso-3d.md — same util as Favoritos/Promociones. */
+  protected readonly tilt = createScrollTilt();
 
   constructor() {
     effect(() => {

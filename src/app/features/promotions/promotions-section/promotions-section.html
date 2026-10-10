@@ -8,6 +8,7 @@
       <div
         class="stage"
         [class.playing]="playing()"
+        [style]="tilt.styleFor()"
         (pointerdown)="onPointerDown($event)"
         (pointerup)="onPointerUp($event)"
         (pointercancel)="onPointerUp($event)"

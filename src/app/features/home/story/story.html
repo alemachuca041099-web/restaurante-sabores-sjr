@@ -46,6 +46,7 @@
       <div
         class="story__stage"
         [style.height.px]="stageHeight()"
+        [style]="tilt.styleFor()"
         (pointerdown)="carousel.onPointerDown($event)"
         (pointerup)="carousel.onPointerUp($event)"
         (pointercancel)="carousel.onPointerUp($event)"
