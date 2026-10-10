@@ -6,6 +6,10 @@ export interface ScrollTiltOptions {
   staggerCount?: number;
   /** Fraction of total progress each staggered step delays its start by. */
   staggerStep?: number;
+  /** 'tilt' (default): rises from below, receded and tipped back (rotateX).
+   *  'lateral': slides in from the side while turning on its vertical axis
+   *  (rotateY), like a page opening — see animaciones/scroll-progreso-3d.md. */
+  style?: 'tilt' | 'lateral';
 }
 
 /**
@@ -21,14 +25,12 @@ export function createScrollTilt(opts: ScrollTiltOptions = {}) {
   const destroyRef = inject(DestroyRef);
   const hostEl = inject(ElementRef<HTMLElement>).nativeElement;
 
-  // TEMP: reduced-motion gate disabled while diagnosing "no veo el efecto"
-  // — restore `document.defaultView?.matchMedia(...).matches ?? false` once
-  // confirmed this isn't the cause.
-  const reduceMotion = false;
+  const reduceMotion = document.defaultView?.matchMedia('(prefers-reduced-motion: reduce)').matches ?? false;
   const revealProgress = signal(reduceMotion ? 1 : 0);
 
   const staggerCount = opts.staggerCount ?? 0;
   const staggerStep = opts.staggerStep ?? 0.08;
+  const style = opts.style ?? 'tilt';
 
   let raf = 0;
 
@@ -71,13 +73,30 @@ export function createScrollTilt(opts: ScrollTiltOptions = {}) {
   /** Inline transform + opacity for an item at the given index. */
   function styleFor(index = 0): Record<string, string> {
     const t = progressFor(index);
+    const opacity = `${0.15 + t * 0.85}`;
+
+    if (style === 'lateral') {
+      // Slides in from the side while turning on its vertical axis, like a
+      // page opening — kept modest (40%/45deg, not the 106%/34deg of a
+      // literal absolutely-stacked page) so it doesn't visually plow
+      // through its side-by-side neighbor in the rail/track before settling.
+      const slide = (1 - t) * 40;
+      const spin = (1 - t) * -45;
+      const scale = 0.92 + t * 0.08;
+      return {
+        transform: `perspective(1200px) translateX(${slide}%) rotateY(${spin}deg) scale(${scale})`,
+        'transform-origin': 'left center',
+        opacity,
+      };
+    }
+
     const tilt = (1 - t) * 50;
     const lift = (1 - t) * 48;
     const depth = (1 - t) * -120;
     const scale = 0.88 + t * 0.12;
     return {
       transform: `perspective(1200px) translateY(${lift}px) translateZ(${depth}px) rotateX(${tilt}deg) scale(${scale})`,
-      opacity: `${0.15 + t * 0.85}`,
+      opacity,
     };
   }
 

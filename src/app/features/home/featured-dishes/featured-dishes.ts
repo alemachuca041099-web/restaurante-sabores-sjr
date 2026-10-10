@@ -40,7 +40,7 @@ export class FeaturedDishes implements AfterViewInit {
 
   /** 3D entrance per card, see animaciones/scroll-progreso-3d.md — shared
    *  with Promociones and Nuestra identidad instead of each reimplementing it. */
-  protected readonly tilt = createScrollTilt({ staggerCount: 5, staggerStep: 0.08 });
+  protected readonly tilt = createScrollTilt({ staggerCount: 5, staggerStep: 0.08, style: 'lateral' });
 
   // True while an arrow-click-triggered smooth scroll is still settling.
   // onRailScroll() ignores the rail's native `scroll` events during this
