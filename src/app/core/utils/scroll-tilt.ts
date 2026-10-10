@@ -21,7 +21,10 @@ export function createScrollTilt(opts: ScrollTiltOptions = {}) {
   const destroyRef = inject(DestroyRef);
   const hostEl = inject(ElementRef<HTMLElement>).nativeElement;
 
-  const reduceMotion = document.defaultView?.matchMedia('(prefers-reduced-motion: reduce)').matches ?? false;
+  // TEMP: reduced-motion gate disabled while diagnosing "no veo el efecto"
+  // — restore `document.defaultView?.matchMedia(...).matches ?? false` once
+  // confirmed this isn't the cause.
+  const reduceMotion = false;
   const revealProgress = signal(reduceMotion ? 1 : 0);
 
   const staggerCount = opts.staggerCount ?? 0;
