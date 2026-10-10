@@ -16,7 +16,7 @@
       <!-- Tablet/desktop: partial-peek scroll rail. -->
       <ul class="featured__rail scroll-x" #rail appScrollFade (scroll)="onRailScroll()">
         @for (d of dishes(); track d.id; let i = $index) {
-          <li appReveal [revealDelay]="i * 60">
+          <li [style]="cardStyle(i)">
             <app-dish-card [dish]="d" variant="tile" [showCategory]="true" (select)="open($event)" />
           </li>
         }
@@ -30,8 +30,8 @@
         (pointercancel)="carousel.onPointerUp($event)"
       >
         <div class="featured__track" [style.transform]="'translateX(' + -carousel.index() * 100 + '%)'">
-          @for (d of dishes(); track d.id) {
-            <div class="featured__slide">
+          @for (d of dishes(); track d.id; let i = $index) {
+            <div class="featured__slide" [style]="cardStyle(i)">
               <app-dish-card [dish]="d" variant="tile" [showCategory]="true" (select)="open($event)" />
             </div>
           }

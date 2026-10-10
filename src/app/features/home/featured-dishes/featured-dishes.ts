@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, computed, inject, signal, viewChild } from '@angular/core';
-import { RevealDirective } from '../../../core/directives/reveal.directive';
+import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, computed, inject, signal, viewChild } from '@angular/core';
 import { ScrollFadeDirective } from '../../../core/directives/scroll-fade.directive';
 import { createSlideCarousel } from '../../../core/utils/slide-carousel';
 import { Dish } from '../../../core/models';
@@ -15,22 +15,88 @@ import { SectionTitle } from '../../../shared/components/section-title/section-t
  * scroll rail (several cards visible, arrows scroll by one screen); mobile
  * swaps to a single dish at a time, swipe-only — no autoplay, unlike the
  * promos and discover carousels, so browsing favorites never feels rushed.
+ *
+ * Cards get a 3D entrance tied directly to page scroll position (not a
+ * threshold-triggered fade): as the section approaches, each one rotates
+ * in from a tilted, receded state to flat, staggered by index. Swiping
+ * between dishes on mobile is unaffected — this only drives the one-time
+ * reveal as the section comes into view.
  */
 @Component({
   selector: 'app-featured-dishes',
-  imports: [RevealDirective, ScrollFadeDirective, SectionTitle, DishCard, Icon, RailDots],
+  imports: [ScrollFadeDirective, SectionTitle, DishCard, Icon, RailDots],
   templateUrl: './featured-dishes.html',
   styleUrl: './featured-dishes.scss',
 })
-export class FeaturedDishes implements AfterViewInit {
+export class FeaturedDishes implements AfterViewInit, OnDestroy {
   protected readonly menu = inject(MenuService);
   protected readonly dishes = computed<Dish[]>(() => this.menu.featured());
 
   private readonly host = inject(ElementRef<HTMLElement>);
   private readonly rail = viewChild<ElementRef<HTMLElement>>('rail');
+  private readonly document = inject(DOCUMENT);
 
   /** Desktop/tablet rail position (scroll-driven). */
   protected readonly activeIndex = signal(0);
+
+  private readonly reduceMotion =
+    this.document.defaultView?.matchMedia('(prefers-reduced-motion: reduce)').matches ?? false;
+  private rafId = 0;
+
+  /** 0 (section not reached yet) to 1 (fully scrolled into view) — drives
+   *  the 3D entrance. Starts at 1 for reduced-motion so cards just show flat. */
+  protected readonly revealProgress = signal(this.reduceMotion ? 1 : 0);
+
+  // getBoundingClientRect() forces a synchronous layout read, so it's
+  // throttled to one per animation frame instead of running on every raw
+  // scroll event — same reasoning as the Hero's parallax.
+  @HostListener('window:scroll')
+  onScroll(): void {
+    if (this.reduceMotion || this.rafId) return;
+    this.rafId = requestAnimationFrame(() => {
+      this.rafId = 0;
+      const win = this.document.defaultView;
+      const el = this.host.nativeElement;
+      if (!win || !el) return;
+
+      const rect = el.getBoundingClientRect();
+      // Starts animating once the section's top is a full viewport away,
+      // finishes once it's reached 35% from the top — comfortably before
+      // the cards would otherwise need to be read.
+      const start = win.innerHeight;
+      const end = win.innerHeight * 0.35;
+      const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
+      this.revealProgress.set(progress);
+    });
+  }
+
+  ngOnDestroy(): void {
+    cancelAnimationFrame(this.rafId);
+  }
+
+  /** Per-card local progress (0–1), staggered by index so cards settle one
+   *  after another instead of all at once — capped so a long rail doesn't
+   *  push the last cards' reveal absurdly late. */
+  protected cardProgress(index: number): number {
+    const staggerIndex = Math.min(index, 5);
+    const threshold = staggerIndex * 0.08;
+    const p = this.revealProgress();
+    if (p <= threshold) return 0;
+    return Math.min(1, (p - threshold) / (1 - threshold));
+  }
+
+  /** Inline 3D transform + opacity for a card at the given reveal progress. */
+  protected cardStyle(index: number): Record<string, string> {
+    const t = this.cardProgress(index);
+    const tilt = (1 - t) * 50;
+    const lift = (1 - t) * 48;
+    const depth = (1 - t) * -120;
+    const scale = 0.88 + t * 0.12;
+    return {
+      transform: `perspective(1200px) translateY(${lift}px) translateZ(${depth}px) rotateX(${tilt}deg) scale(${scale})`,
+      opacity: `${0.15 + t * 0.85}`,
+    };
+  }
 
   // True while an arrow-click-triggered smooth scroll is still settling.
   // onRailScroll() ignores the rail's native `scroll` events during this

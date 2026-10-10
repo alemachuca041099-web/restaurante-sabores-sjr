@@ -52,6 +52,8 @@
 .featured__slide {
   flex: 0 0 100%;
   padding-inline: 1px; /* keeps the tile's own border-radius from clipping at the edge */
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .featured__dots {
@@ -69,6 +71,8 @@
 
   .featured__rail li {
     width: min(32vw, 300px);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
   }
 
   .featured__stage,
