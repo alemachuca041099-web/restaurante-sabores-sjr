@@ -1,28 +1,41 @@
 @if (dishes().length) {
   <section class="section featured" id="especialidades" aria-labelledby="featured-title">
     <div class="container">
-      <div class="featured__head">
-        <app-section-title eyebrow="Lo que nos distingue" title="Nuestros favoritos" accent="favoritos" />
-        <div class="featured__nav">
-          <button type="button" class="featured__arrow" (click)="scroll(-1)" aria-label="Ver anteriores">
-            <app-icon name="chevron-left" />
-          </button>
-          <button type="button" class="featured__arrow" (click)="scroll(1)" aria-label="Ver siguientes">
-            <app-icon name="chevron-right" />
-          </button>
+      <app-section-title eyebrow="Lo que nos distingue" title="Nuestros favoritos" accent="favoritos" />
+    </div>
+
+    <!-- Desktop/tablet: sticky stack, driven by the page's own scroll. -->
+    <div class="container">
+      <div class="pf-rows">
+        <div class="pf-col pf-texts">
+          @for (d of dishes(); track d.id; let i = $index) {
+            <button type="button" class="pf-card" [style.--gi]="i" (click)="open(d)">
+              <h3 class="pf-name display">{{ d.name }}</h3>
+              <p class="pf-price display">{{ d.price | mxn }}</p>
+              <p class="pf-desc">{{ d.description }}</p>
+              @if (tagLabel(d); as tag) {
+                <span class="pf-tag">{{ tag }}</span>
+              }
+            </button>
+          }
+          <div class="pf-spacer" aria-hidden="true"></div>
+        </div>
+
+        <div class="pf-col pf-shots">
+          @for (d of dishes(); track d.id; let i = $index) {
+            <button type="button" class="pf-shot" [style.--gi]="i" (click)="open(d)" [attr.aria-label]="'Ver ' + d.name">
+              <img [src]="d.image" [alt]="d.name" [appImgFallback]="d.name" loading="lazy" decoding="async" width="600" height="600" />
+              <span class="pf-veil" aria-hidden="true">
+                <img src="assets/images/brand/logo.png" alt="" width="48" height="48" loading="lazy" />
+              </span>
+            </button>
+          }
         </div>
       </div>
+    </div>
 
-      <!-- Tablet/desktop: partial-peek scroll rail. -->
-      <ul class="featured__rail scroll-x" #rail appScrollFade (scroll)="onRailScroll()">
-        @for (d of dishes(); track d.id; let i = $index) {
-          <li [style]="tilt.styleFor(i)">
-            <app-dish-card [dish]="d" variant="tile" [showCategory]="true" (select)="open($event)" />
-          </li>
-        }
-      </ul>
-
-      <!-- Mobile: one favorito at a time, swipe-only (no autoplay). -->
+    <!-- Mobile: one favorito at a time, swipe-only (no autoplay). -->
+    <div class="container">
       <div
         class="featured__stage"
         (pointerdown)="carousel.onPointerDown($event)"
